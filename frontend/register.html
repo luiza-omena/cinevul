@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro - CineViewExperience</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Criar Conta</h1>
+    <form id="registerForm">
+      <input type="text" id="full_name" placeholder="Nome completo" required />
+      <input type="date" id="birth_date" placeholder="Data de nascimento" required />
+      <input type="text" id="username" placeholder="Usuário" required />
+      <input type="password" id="password" placeholder="Senha" required />
+      <button type="submit">Cadastrar</button>
+    </form>
+    <p id="registerMsg"></p>
+    <p><a href="login.html">Já tem conta? Faça login</a></p>
+  </div>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", registerUser);
+  </script>
+</body>
+</html>

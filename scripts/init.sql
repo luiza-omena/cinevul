@@ -17,3 +17,11 @@ CREATE TABLE orders (
     movie_id INTEGER REFERENCES movies(id),
     purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    full_name TEXT NOT NULL,
+    birth_date DATE NOT NULL
+);
