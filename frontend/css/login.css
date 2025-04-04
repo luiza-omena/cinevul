@@ -1,0 +1,67 @@
+body {
+  background-color: #141414;
+  font-family: Arial, sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: #1c1c1c;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+h1 {
+  color: #e50914;
+  margin-bottom: 1rem;
+}
+
+form input {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: none;
+  border-radius: 4px;
+  background-color: #333;
+  color: white;
+}
+
+form input:focus {
+  outline: 2px solid #e50914;
+}
+
+button {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 4px;
+  width: 100%;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background-color: #bf0810;
+}
+
+a {
+  color: #e50914;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#registerMsg {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
