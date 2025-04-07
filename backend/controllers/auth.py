@@ -1,6 +1,13 @@
 from database import get_connection
+from controllers.session import set_session
+from controllers.session import get_user_from_token
 
-def login(data):
+
+def get_user_id_from_token(token):
+    return get_user_from_token(token)
+
+def login(data, token):
+    print("🎯 Verificando usuário no banco...", flush=True)
     conn = get_connection()
     cur = conn.cursor()
 
@@ -14,8 +21,13 @@ def login(data):
     conn.close()
 
     if user:
-        return {"success": True, "user_id": user[0]}
+        user_id = user[0]
+        print(f"✅ Login bem-sucedido! user_id: {user_id}", flush=True)
+        set_session(token, user_id)
+        return {"success": True}
+    print("❌ Login falhou: credenciais inválidas", flush=True)
     return {"success": False}
+
 
 def register(data):
     conn = get_connection()
