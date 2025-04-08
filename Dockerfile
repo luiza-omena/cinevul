@@ -11,4 +11,4 @@ ENV PYTHONPATH=/app/app
 
 EXPOSE 8000
 
-CMD ["python", "server.py"]
+CMD ["python", "-u", "server.py"]
