@@ -3,8 +3,8 @@ from controllers.auth import login, register
 from controllers.movies import get_movies
 from controllers.orders import create_order
 from controllers.dashboard import get_dashboard_data
-from controllers.session import generate_token, is_authenticated
-from controllers.session import logout_user
+from controllers.session import generate_token, is_authenticated, logout_user
+
 
 ALLOWED_ORIGIN = "http://localhost:5500"
 
@@ -56,7 +56,8 @@ def handle_get(handler):
     handler.wfile.write(json.dumps(response).encode())
 
 def handle_post(handler):
-    token = get_token_from_cookie(handler) or generate_token()
+    token_cookie = get_token_from_cookie(handler)
+    token = token_cookie or generate_token()
 
     print("📩 POST recebido:", handler.path, flush=True)
     print("📎 Token usado:", token, flush=True)
@@ -77,7 +78,6 @@ def handle_post(handler):
         response = create_order(post_data)
         handler.send_response(201 if response.get("success") else 400)
     elif handler.path.startswith("/logout"):
-        from controllers.session import logout_user, generate_token
         print("🚪 Logout recebido!", flush=True)
         logout_user(token)
 
