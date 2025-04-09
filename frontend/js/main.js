@@ -42,35 +42,31 @@ async function handleLogin(e) {
 }
 
 async function loadMovies() {
-  console.log("🎬 Buscando filmes...");
+  console.log("🚀 Carregando filmes...");
   const res = await fetch("http://localhost:8000/movies", {
-    credentials: "include",
+    credentials: "include"
   });
-  console.log("🔁 Resposta bruta da API:", res);
-  const data = await res.json();
-  console.log("📦 Conteúdo recebido:", data);
-  
+
+  const movies = await res.json();
   const container = document.getElementById("moviesList");
 
-  if (data.error === "Usuário não autenticado") {
-    container.innerHTML = "<p style='color: red;'>Você precisa estar logado para acessar os filmes.</p>";
-    return;
-  }
-
-  if (!Array.isArray(data)) {
+  if (!Array.isArray(movies)) {
     container.innerHTML = "<p>Erro ao carregar filmes.</p>";
-    console.error("Resposta inválida:", data);
     return;
   }
 
-  container.innerHTML = data.map(m => `
+  container.innerHTML = movies.map(movie => `
     <div class="movie-card">
-      <h3>${m.title}</h3>
-      <p>Lançamento: ${m.release_year}</p>
-      <button onclick="orderTicket(${m.id})">Comprar Ingresso</button>
+      <img src="${movie.image_url}" alt="${movie.title}" />
+      <div class="info">
+        <h3>${movie.title}</h3>
+        <p>Lançamento: ${movie.release_year}</p>
+        <button onclick="orderTicket(${movie.id})">Comprar Ingresso</button>
+      </div>
     </div>
   `).join("");
 }
+
 
 async function orderTicket(movieId) {
   const userId = 1; // pode vir do localStorage no futuro
@@ -137,3 +133,43 @@ async function logout() {
     }, 500);
   }
 }
+function orderTicket(movieId) {
+  document.getElementById("movieId").value = movieId;
+  document.getElementById("modal").classList.remove("hidden");
+}
+
+function closeModal() {
+  document.getElementById("modal").classList.add("hidden");
+}
+
+function toggleProofInput() {
+  const type = document.getElementById("type").value;
+  const proof = document.getElementById("proofContainer");
+  proof.classList.toggle("hidden", type !== "meia");
+}
+
+async function submitTicket(e) {
+  e.preventDefault();
+  const movieId = document.getElementById("movieId").value;
+  const quantity = document.getElementById("quantity").value;
+  const type = document.getElementById("type").value;
+  const proof = document.getElementById("proof").value;
+
+  const payload = {
+    movie_id: movieId,
+    quantity,
+    type,
+    proof // ⚠️ campo vulnerável a XSS refletido
+  };
+
+  await fetch("http://localhost:8000/order", {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+
+  alert("Pedido realizado!");
+  closeModal();
+}
+
