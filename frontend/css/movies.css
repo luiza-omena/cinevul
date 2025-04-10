@@ -1,41 +1,109 @@
+body {
+  background-color: #141414;
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  color: white;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.container {
+  padding: 2rem;
+}
+
+h1 {
+  cursor: default;
+  position: relative;
+  font-family: 'Bebas Neue', 'Inter', sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: rgba(229, 10, 20, 0.3);
+  text-align: center;
+  margin-top: 3rem;
+  z-index: 1;
+}
+
+h1::before {
+  content: "";
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110%;
+  height: 20px;
+  background: radial-gradient(ellipse at center, rgba(229, 9, 20, 0.4) 0%, transparent 80%);
+  border-radius: 50%;
+  z-index: -1;
+  pointer-events: none;
+}
+
 #moviesList {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
   margin-top: 2rem;
 }
 
 .movie-card {
-  background-color: #222;
-  padding: 1rem;
+  display: flex;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  background-color: #1c1c1c;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(229, 9, 20, 0.2);
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(229, 9, 20, 0.1);
   transition: transform 0.3s ease;
-  text-align: left;
+  text-align: center;
+  padding-bottom: 1rem;
 }
 
 .movie-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(229, 9, 20, 0.4);
+  box-shadow: 0 0 25px rgba(229, 9, 20, 0.3);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  border-bottom: 2px solid #e50914;
+}
+
+.movie-card .info {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
 }
 
 .movie-card h3 {
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 1.2rem;
+  color: white;
   margin-bottom: 0.5rem;
-  color: #fff;
 }
 
 .movie-card p {
   color: #bbb;
-  margin-bottom: 1rem;
+  font-size: 0.9rem;
 }
 
 .movie-card button {
+  display: inline;
+  align-self: center;
+  width: 50%;
+  margin-top: auto;
   background-color: #e50914;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
+  margin-bottom: 0.75rem;
+  font-weight: bold;
 }
 
 .movie-card button:hover {
@@ -49,10 +117,212 @@
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
-  float: right;
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
   margin: 1rem;
 }
 
 .logout-btn:hover {
   background-color: #bf0810;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #1c1c1c;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 80%;
+  max-width: 900px;
+  margin: 5% auto;
+  color: white;
+  position: relative;
+  box-shadow: 0 0 15px rgba(229, 9, 20, 0.4);
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.movie-info {
+  cursor: default;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.movie-info img {
+  max-width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(229, 9, 20, 0.3);
+}
+
+#ticketForm {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+#ticketForm label {
+  font-weight: 600;
+}
+
+#ticketForm input,
+#ticketForm select {
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: none;
+  background-color: #2c2c2c;
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+#ticketForm select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 0.7rem center;
+  background-size: 1rem;
+  padding-right: 2rem;
+}
+
+#ticketForm button {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 0.6rem;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#ticketForm button:hover {
+  background-color: #bf0810;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  cursor: default;
+}
+
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: none;
+}
+
+.modal-content button {
+  background-color: #e50914;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.modal-content button:hover {
+  background-color: #bf0810;
+}
+
+.close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.confirmation {
+  display: flex;
+  cursor: default;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem;
+}
+
+.confirmation h2 {
+  color: #e50914;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+}
+
+.confirmation p {
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.unauth-container {
+  background-color: #1c1c1c;
+  border: 1px solid #e50914;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  margin-top: 4rem;
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
+  max-width: 600px;
+}
+
+.unauth-container h2 {
+  color: #e50914;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.unauth-container p {
+  color: #ccc;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.login-btn {
+  background-color: #e50914;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #bf0810;
+}
+
+.center-message {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  text-align: center;
 }

@@ -10,12 +10,19 @@ CREATE TABLE movies (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT,
-    release_date DATE
+    release_date DATE,
+    image_url TEXT,
+    price NUMERIC(10,2)
 );
 
 CREATE TABLE orders (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(id),
-    movie_id INTEGER REFERENCES movies(id),
-    purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  id SERIAL PRIMARY KEY,
+  user_id INT REFERENCES users(id),
+  movie_id INT REFERENCES movies(id),
+  quantity INT NOT NULL,
+  type TEXT NOT NULL,
+  proof TEXT,
+  total_price NUMERIC(10,2),
+  seats TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

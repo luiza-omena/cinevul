@@ -1,9 +1,9 @@
 import json
 from controllers.auth import login, register
 from controllers.movies import get_movies
-from controllers.orders import create_order
+from controllers.orders import create_order, get_all_orders_with_movies
 from controllers.dashboard import get_dashboard_data
-from controllers.session import generate_token, is_authenticated, logout_user
+from controllers.session import generate_token, get_user_from_token, is_authenticated, logout_user
 
 
 ALLOWED_ORIGIN = "http://localhost:5500"
@@ -48,6 +48,9 @@ def handle_get(handler):
         response = get_movies()
     elif handler.path.startswith("/dashboard"):
         response = get_dashboard_data()
+    elif handler.path.startswith("/admin/orders"):
+        response = get_all_orders_with_movies()
+
     else:
         handler.send_response(404)
         response = {"error": "Not Found"}
@@ -75,7 +78,8 @@ def handle_post(handler):
         response = register(post_data)
         handler.send_response(201 if response.get("success") else 400)
     elif handler.path.startswith("/order"):
-        response = create_order(post_data)
+        user_id = get_user_from_token(token)
+        response = create_order(post_data, user_id)
         handler.send_response(201 if response.get("success") else 400)
     elif handler.path.startswith("/logout"):
         print("🚪 Logout recebido!", flush=True)
