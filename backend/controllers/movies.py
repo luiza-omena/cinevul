@@ -4,25 +4,22 @@ from datetime import datetime
 def get_movies():
     conn = get_connection()
     cur = conn.cursor()
-
-    cur.execute("SELECT id, title, description, release_date, image_url FROM movies")
+    cur.execute("SELECT id, title, description, release_date, image_url, price FROM movies")
     rows = cur.fetchall()
-
     cur.close()
     conn.close()
 
-    movies = []
-    for row in rows:
-        movies.append({
+    return [
+        {
             "id": row[0],
             "title": row[1],
             "description": row[2],
             "release_year": row[3].year if row[3] else None,
-            "image_url": row[4]
-        })
-
-    return movies
-
+            "image_url": row[4],
+            "price": float(row[5])
+        }
+        for row in rows
+    ]
 
 def create_movie(data):
     conn = get_connection()

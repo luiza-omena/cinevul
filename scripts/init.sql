@@ -11,7 +11,8 @@ CREATE TABLE movies (
     title VARCHAR(255) NOT NULL,
     description TEXT,
     release_date DATE,
-    image_url TEXT
+    image_url TEXT,
+    price NUMERIC(10,2)
 );
 
 CREATE TABLE orders (

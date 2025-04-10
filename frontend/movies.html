@@ -4,44 +4,59 @@
     <meta charset="UTF-8" />
     <title>Filmes - CineViewExperience</title>
     <link rel="stylesheet" href="css/movies.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
   </head>  
 <body>
   <button class="logout-btn" onclick="logout()">Sair</button>
   <div class="container">
-    <h1>Filmes em Cartaz</h1>
+    <h1 id="moviesTitle">Filmes em Cartaz</h1>
     <div id="moviesList"></div>
   </div>
   <!-- Modal -->
   <div id="modal" class="modal hidden">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
-      <h2>Comprar Ingresso</h2>
-      <form id="ticketForm" onsubmit="submitTicket(event)">
-        <input type="hidden" id="movieId" />
-        <label for="quantity">Quantidade:</label>
-        <input type="number" id="quantity" min="1" value="1" required />
-        
-        <label for="type">Tipo:</label>
-        <select id="type" onchange="toggleProofInput()" required>
-          <option value="inteira">Inteira</option>
-          <option value="meia">Meia</option>
-        </select>
-        
-        <div id="proofContainer" class="hidden">
-          <label for="proof">Comprovante de meia:</label>
-          <input type="text" id="proof" placeholder="Descreva seu comprovante" />
+      <div id="ticketContent">
+        <h2>Comprar Ingresso</h2>
+        <div class="modal-body">
+          <div class="movie-info">
+            <img id="modalPoster" src="" alt="Poster" />
+            <h3 id="modalMovieTitle"></h3>
+            <p id="modalDescription"></p>
+          </div>
+  
+          <form id="ticketForm" onsubmit="submitTicket(event)">
+            <input type="hidden" id="movieId" />
+            <label for="quantity">Quantidade:</label>
+            <input type="number" id="quantity" min="1" value="1" required />
+  
+            <label for="type">Tipo:</label>
+            <select id="type" onchange="toggleProofInput()" required>
+              <option value="inteira">Inteira</option>
+              <option value="meia">Meia</option>
+            </select>
+  
+            <div id="proofContainer" class="hidden">
+              <label for="proof">Comprovante de meia:</label>
+              <input type="text" id="proof" placeholder="Descreva seu comprovante" />
+            </div>
+  
+            <label for="seats">Cadeiras (ex: A1,A2):</label>
+            <input type="text" id="seats" placeholder="Ex: A1,A2" required />
+  
+            <p id="pricePreview" style="cursor: default;"></p>
+  
+            <button type="submit">Confirmar</button>
+          </form>
         </div>
-        
-        <label for="seats">Cadeiras (ex: A1,A2):</label>
-        <input type="text" id="seats" placeholder="Ex: A1,A2" required />
-        
-        <p id="pricePreview"></p>
-        
-        <button type="submit">Confirmar</button>        
-      </form>
+      </div>
+  
+      <div id="confirmationMessage" class="confirmation hidden">
+        <h2>Compra Confirmada!</h2>
+        <p id="confirmationText"></p>
+      </div>
     </div>
-  </div>
+  </div>  
 
   <script src="js/main.js"></script>
   <script>
