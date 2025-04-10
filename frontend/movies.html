@@ -20,21 +20,25 @@
       <form id="ticketForm" onsubmit="submitTicket(event)">
         <input type="hidden" id="movieId" />
         <label for="quantity">Quantidade:</label>
-        <span>-</span>
-        <input type="text" id="quantity" min="1" required />
-        <span>-</span>
+        <input type="number" id="quantity" min="1" value="1" required />
+        
         <label for="type">Tipo:</label>
         <select id="type" onchange="toggleProofInput()" required>
           <option value="inteira">Inteira</option>
           <option value="meia">Meia</option>
         </select>
-
+        
         <div id="proofContainer" class="hidden">
           <label for="proof">Comprovante de meia:</label>
           <input type="text" id="proof" placeholder="Descreva seu comprovante" />
         </div>
-
-        <button type="submit">Confirmar</button>
+        
+        <label for="seats">Cadeiras (ex: A1,A2):</label>
+        <input type="text" id="seats" placeholder="Ex: A1,A2" required />
+        
+        <p id="pricePreview"></p>
+        
+        <button type="submit">Confirmar</button>        
       </form>
     </div>
   </div>

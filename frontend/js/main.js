@@ -148,28 +148,53 @@ function toggleProofInput() {
   proof.classList.toggle("hidden", type !== "meia");
 }
 
+function calculatePrice(type, qty) {
+  const FULLPRICE = 20;
+  const HALFPRICE = 10;
+  return type === "half" ? HALFPRICE * qty : FULLPRICE * qty;
+}
+
 async function submitTicket(e) {
   e.preventDefault();
-  const movieId = document.getElementById("movieId").value;
-  const quantity = document.getElementById("quantity").value;
+
+  const movie_id = document.getElementById("movieId").value;
+  const quantity = parseInt(document.getElementById("quantity").value);
   const type = document.getElementById("type").value;
   const proof = document.getElementById("proof").value;
+  const seats = document.getElementById("seats").value;
+  const total_price = calculatePrice(type, quantity);
 
   const payload = {
-    movie_id: movieId,
+    movie_id,
     quantity,
     type,
-    proof // ⚠️ campo vulnerável a XSS refletido
+    proof,
+    seats,
+    total_price
   };
 
-  await fetch("http://localhost:8000/order", {
+  const res = await fetch("http://localhost:8000/order", {
     method: "POST",
     credentials: "include",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
   });
 
-  alert("Pedido realizado!");
-  closeModal();
+  if (res.ok) {
+    alert("Order placed successfully!");
+    closeModal();
+  } else {
+    alert("Failed to place the order.");
+  }
+}
+
+document.getElementById("quantity").addEventListener("input", updatePrice);
+document.getElementById("type").addEventListener("change", updatePrice);
+
+function updatePrice() {
+  const qty = parseInt(document.getElementById("quantity").value || 1);
+  const type = document.getElementById("type").value;
+  const total = calculatePrice(type, qty);
+  document.getElementById("pricePreview").textContent = `Total: R$ ${total.toFixed(2)}`;
 }
 
