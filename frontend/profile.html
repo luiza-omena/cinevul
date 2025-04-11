@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Perfil - CineViewExperience</title>
+  <link rel="stylesheet" href="css/profile.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+  <button class="logout-btn" onclick="logout()">Sair</button>
+
+  <div class="container">
+    <h1>Meu Perfil</h1>
+    
+    <div id="userInfo" class="user-card"></div>
+
+    <div id="editUsernameModal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close" onclick="closeEditModal()">&times;</span>
+        <h3>Editar Nome de Usuário</h3>
+        <form id="editUsernameForm">
+          <input type="text" id="newUsername" placeholder="Novo nome de usuário" required>
+          <input type="hidden" id="editUserId">
+          <button type="submit">Salvar</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="filters">
+      <div class="search-filters">
+        <input type="text" id="searchInput" placeholder="Buscar por filme, tipo ou cadeiras...">
+        <button id="applyFilter" class="filter-btn">➤</button>
+      </div>
+      <select id="typeFilter">
+        <option value="">Todos os tipos</option>
+        <option value="inteira">Inteira</option>
+        <option value="meia">Meia</option>
+      </select>
+    </div>
+
+    <div id="activeFilters" class="active-filters"></div>
+
+    <h2 style="margin-top: 2rem;">Meus Pedidos</h2>
+    <div id="userOrders"></div>
+    <div class="pagination">
+      <button id="prevPage">⟨</button>
+      <div id="paginationNumbers" class="pagination-numbers"></div>
+      <button id="nextPage">⟩</button>
+      <select id="perPageSelect" class="per-page-select">
+        <option value="5">5 por página</option>
+        <option value="10" selected>10 por página</option>
+        <option value="20">20 por página</option>
+        <option value="50">50 por página</option>
+      </select>
+    </div>
+  </div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

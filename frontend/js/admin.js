@@ -1,5 +1,3 @@
-const API_BASE = "http://localhost:8000";
-
 document.addEventListener("DOMContentLoaded", async () => {
     const res = await fetch("http://localhost:8000/admin/orders", {
       credentials: "include"

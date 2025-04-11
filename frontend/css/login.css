@@ -8,6 +8,14 @@ body {
   height: 100vh;
 }
 
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.5px #e50914;
+  border: 0.5px solid #e50914;
+}
+
 .container {
   background-color: #1c1c1c;
   padding: 2rem;

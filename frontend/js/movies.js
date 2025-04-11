@@ -1,5 +1,3 @@
-const API_BASE = "http://localhost:8000";
-
 document.addEventListener("DOMContentLoaded", () => {
   loadMovies();
 
@@ -42,7 +40,7 @@ async function loadMovies() {
       <img src="${movie.image_url}" alt="${movie.title}" />
       <div class="info">
         <h3>${movie.title}</h3>
-        <p>${movie.release_year}</p>
+        <p style="margin-top: -0.2rem;">${movie.release_year}</p>
         <button onclick="event.stopPropagation(); orderTicket(${movie.id}, ${movie.price}, '${movie.title}', '${movie.description}', '${movie.image_url}')">Comprar Ingresso</button>
       </div>
     </div>
