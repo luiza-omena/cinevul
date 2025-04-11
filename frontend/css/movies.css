@@ -1,48 +1,5 @@
-body {
-  background-color: #141414;
-  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-  color: white;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
-
 .container {
   padding: 2rem;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-  outline: none;
-  box-shadow: 0 0 0 0.5px #e50914;
-  border: 0.5px solid #e50914;
-}
-
-h1 {
-  cursor: default;
-  position: relative;
-  font-family: 'Bebas Neue', 'Inter', sans-serif;
-  font-size: 4rem;
-  font-weight: 700;
-  color: rgba(229, 10, 20, 0.3);
-  text-align: center;
-  margin-top: 3rem;
-  z-index: 1;
-}
-
-h1::before {
-  content: "";
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 110%;
-  height: 20px;
-  background: radial-gradient(ellipse at center, rgba(229, 9, 20, 0.4) 0%, transparent 80%);
-  border-radius: 50%;
-  z-index: -1;
-  pointer-events: none;
 }
 
 #moviesList {
@@ -246,74 +203,17 @@ h1::before {
   font-size: 1.5rem;
 }
 
-.hidden {
-  display: none !important;
+#proofContainer label {
+  margin-bottom: 0.5rem;
 }
 
-.confirmation {
-  display: flex;
-  cursor: default;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 3rem;
-}
-
-.confirmation h2 {
-  color: #e50914;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  text-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
-}
-
-.confirmation p {
-  font-size: 1.2rem;
-  color: #fff;
-}
-
-.unauth-container {
-  background-color: #1c1c1c;
-  border: 1px solid #e50914;
-  border-radius: 8px;
-  padding: 2rem;
-  text-align: center;
-  margin-top: 4rem;
-  box-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
-  max-width: 600px;
-}
-
-.unauth-container h2 {
-  color: #e50914;
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-}
-
-.unauth-container p {
-  color: #ccc;
-  margin-bottom: 1.5rem;
-  font-size: 1.1rem;
-}
-
-.login-btn {
-  background-color: #e50914;
-  padding: 0.6rem 1.2rem;
-  border: none;
+#proofContainer input {
+  margin-top: 0.8rem;
+  padding: 0.5rem;
   border-radius: 4px;
+  border: none;
+  background-color: #2c2c2c;
   color: white;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
+  font-family: 'Inter', sans-serif;
 }
 
-.login-btn:hover {
-  background-color: #bf0810;
-}
-
-.center-message {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  min-height: 50vh;
-  text-align: center;
-}

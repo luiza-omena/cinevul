@@ -20,23 +20,24 @@
   </div>  
 
   <div class="container">
-    <h1>Meu Perfil</h1>
+    <h1 class="auth-only">Meu Perfil</h1>
     
-    <div id="userInfo" class="user-card"></div>
+    <div id="userInfo" class="user-card auth-only"></div>
 
-    <div id="editUsernameModal" class="modal hidden">
+    <div id="editProfileModal" class="modal hidden">
       <div class="modal-content">
         <span class="close" onclick="closeEditModal()">&times;</span>
-        <h3>Editar Nome de Usuário</h3>
-        <form id="editUsernameForm">
-          <input type="text" id="newUsername" placeholder="Novo nome de usuário" required>
-          <input type="hidden" id="editUserId">
+        <h3 id="editModalTitle">Editar</h3>
+        <form id="editProfileForm">
+          <input type="text" id="editFieldValue" placeholder="" required />
+          <input type="hidden" id="editFieldType" />
+          <input type="hidden" id="editUserId" />
           <button type="button" onclick="submitEdit()">Salvar</button>
         </form>
       </div>
     </div>
-
-    <div class="filters">
+    
+    <div class="filters auth-only">
       <div class="search-filters">
         <input type="text" id="searchInput" placeholder="Buscar por filme, tipo ou cadeiras...">
         <button id="applyFilter" class="filter-btn">➤</button>
@@ -48,11 +49,13 @@
       </select>
     </div>
 
-    <div id="activeFilters" class="active-filters"></div>
+    <div id="activeFilters" class="active-filters auth-only"></div>
 
-    <h2 style="margin-top: 2rem;">Meus Pedidos</h2>
-    <div id="userOrders"></div>
-    <div class="pagination">
+    <h2 class="auth-only" style="margin-top: 2rem;">Meus Pedidos</h2>
+    
+    <div id="userOrders" class="auth-only"></div>
+
+    <div class="pagination auth-only">
       <button id="prevPage">⟨</button>
       <div id="paginationNumbers" class="pagination-numbers"></div>
       <button id="nextPage">⟩</button>
@@ -67,5 +70,8 @@
 
   <script src="js/utils.js"></script>
   <script src="js/profile.js"></script>
+  <script>
+    loadUserProfile();
+  </script>
 </body>
 </html>

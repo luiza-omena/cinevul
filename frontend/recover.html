@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <title>Recuperar Senha - CineView</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+  <div class="container" id="pageTitle">
+    <h1 class="page-title">Recuperar Senha</h1>
+    <p id="recoverMsg"></p>
+    <form id="recoverForm">
+        <input type="text" id="username" placeholder="Usuário" required />
+        <input type="text" id="favorite_color" placeholder="Cor favorita" required />
+        <input type="text" id="birth_year" placeholder="Ano de nascimento" required />
+        <input type="text" id="first_school" placeholder="Primeira escola" required />
+        <button type="submit">Verificar</button>
+      </form>
+      
+      <form id="newPasswordForm" class="hidden">
+        <input type="password" id="new_password" placeholder="Nova senha" required />
+        <button type="submit">Redefinir Senha</button>
+      </form>
+    </div>    
+    
+      <div id="confirmationMessage" class="confirmation hidden">
+        <h2>Senha Redefinida!</h2>
+        <p>Redirecionando para o login...</p>
+      </div>  
+  <script src="js/utils.js"></script>
+  <script src="js/recover.js"></script>
+</body>
+</html>

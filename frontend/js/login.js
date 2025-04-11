@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (data.success) {
       msg.style.color = "lightgreen";
       msg.textContent = "Login realizado com sucesso!";
-      setTimeout(() => window.location.href = "movies.html", 1000);
+      setTimeout(() => window.location.href = "movies.html", 300);
     } else {
       msg.style.color = "#e50914";
       msg.textContent = "Usuário ou senha incorretos.";

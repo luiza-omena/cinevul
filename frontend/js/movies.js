@@ -13,12 +13,9 @@ async function loadMovies() {
   const movies = await res.json();
 
   const container = document.getElementById("moviesList");
-  const logoutBtn = document.querySelector(".logout-btn");
-  const title = document.getElementById("moviesTitle");
 
   if (movies.error) {
-    if (logoutBtn) logoutBtn.classList.add("hidden");
-    if (title) title.classList.add("hidden");
+    toggleAuthVisibility(false);
 
     container.classList.add("center-message");
     container.innerHTML = `
@@ -31,10 +28,9 @@ async function loadMovies() {
     return;
   }
 
-  if (logoutBtn) logoutBtn.classList.remove("hidden");
-  if (title) title.classList.remove("hidden");
-  container.classList.remove("center-message");
+  toggleAuthVisibility(true);
 
+  container.classList.remove("center-message");
   container.innerHTML = movies.map(movie => `
     <div class="movie-card" onclick="orderTicket(${movie.id}, ${movie.price}, '${movie.title}', '${movie.description}', '${movie.image_url}')">
       <img src="${movie.image_url}" alt="${movie.title}" />
@@ -44,7 +40,7 @@ async function loadMovies() {
         <button onclick="event.stopPropagation(); orderTicket(${movie.id}, ${movie.price}, '${movie.title}', '${movie.description}', '${movie.image_url}')">Comprar Ingresso</button>
       </div>
     </div>
-  `).join("");  
+  `).join("");
 }
 
 function orderTicket(movieId, price, title, description, imageUrl) {

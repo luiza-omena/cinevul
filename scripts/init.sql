@@ -3,7 +3,13 @@ CREATE TABLE users (
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
     full_name TEXT NOT NULL,
-    birth_date DATE NOT NULL
+    birth_date DATE NOT NULL,
+    is_admin BOOLEAN DEFAULT FALSE,
+    email TEXT UNIQUE NOT NULL,
+    phone TEXT,
+    favorite_color TEXT,
+    birth_year TEXT,
+    first_school TEXT
 );
 
 CREATE TABLE movies (

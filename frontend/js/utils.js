@@ -13,7 +13,7 @@ async function logout() {
   if (data.success) {
     setTimeout(() => {
       window.location.href = "login.html";
-    }, 500);
+    }, 300);
   }
 }
 
@@ -36,3 +36,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
 window.toggleMenu = toggleMenu;
 window.logout = logout;
+
+function toggleAuthVisibility(isAuthenticated) {
+  const authElements = document.querySelectorAll(".auth-only");
+  const menu = document.querySelector(".menu-wrapper");
+
+  authElements.forEach(el => {
+    if (isAuthenticated) {
+      el.classList.remove("hidden");
+    } else {
+      el.classList.add("hidden");
+    }
+  });
+
+  if (menu) {
+    if (isAuthenticated) menu.classList.remove("hidden");
+    else menu.classList.add("hidden");
+  }
+}
+
+window.toggleAuthVisibility = toggleAuthVisibility;

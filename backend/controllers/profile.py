@@ -4,18 +4,18 @@ def get_profile_data(user_id):
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("SELECT username, full_name, birth_date FROM users WHERE id = %s", (user_id,))
+    cur.execute("SELECT username, full_name, birth_date, email, phone FROM users WHERE id = %s", (user_id,))
     user = cur.fetchone()
 
     if not user:
-        cur.close()
-        conn.close()
-        return {"error": "Usuário não encontrado"}
-
+        ...
+        
     user_data = {
         "username": user[0],
         "full_name": user[1],
         "birth_date": str(user[2]),
+        "email": user[3],
+        "phone": user[4],
         "id": user_id
     }
 
@@ -60,4 +60,20 @@ def update_username_raw(user_id, new_username):
         return {"success": True}
     except Exception as e:
         print("Erro ao editar nome de usuário:", e)
+        return {"success": False, "error": str(e)}
+    
+def update_profile_field(user_id, field, value):
+    try:
+        if field not in ["email", "phone"]:
+            return {"success": False, "error": "Campo inválido"}
+
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute(f"UPDATE users SET {field} = %s WHERE id = %s", (value, user_id))
+        conn.commit()
+        cur.close()
+        conn.close()
+        return {"success": True}
+    except Exception as e:
+        print(f"Erro ao editar {field}:", e)
         return {"success": False, "error": str(e)}
