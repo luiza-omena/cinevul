@@ -3,22 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <title>Cadastro - CineViewExperience</title>
+  <link rel="stylesheet" href="css/global.css" />
   <link rel="stylesheet" href="css/login.css" />
 </head>
 <body>
   <div class="container">
-    <h1>CineView</h1>
+    <h1>Cadastro</h1>
     <form id="registerForm">
       <input type="text" id="full_name" placeholder="Nome completo" required />
       <input type="date" id="birth_date" required />
       <input type="text" id="username" placeholder="Usuário" required />
+      <input type="email" id="email" placeholder="E-mail" required />
+      <input type="text" id="phone" placeholder="Celular" />
+      <input type="text" id="favorite_color" placeholder="Cor favorita" required />
+      <input type="text" id="birth_year" placeholder="Ano de nascimento" required />
+      <input type="text" id="first_school" placeholder="Primeira escola" required />
       <input type="password" id="password" placeholder="Senha" required />
       <button type="submit">Cadastrar</button>
     </form>
     <p id="registerMsg"></p>
-    <p><a href="login.html">Já tem conta? Faça login</a></p>
+    <p><a href="login.html" class="login-link">Já tem conta? Faça login</a></p>
   </div>
-  <script src="js/main.js"></script>
+  <script src="js/register.js"></script>
+  <script src="js/utils.js"></script>
   <script>
     document.getElementById("registerForm").addEventListener("submit", registerUser);
   </script>

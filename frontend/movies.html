@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Filmes - CineViewExperience</title>
-    <link rel="stylesheet" href="css/movies.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
-  </head>  
+<head>
+  <meta charset="UTF-8" />
+  <title>Filmes - CineViewExperience</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/movies.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>  
 <body>
-  <button class="logout-btn" onclick="logout()">Sair</button>
+  <div class="menu-wrapper auth-only">
+    <button class="menu-btn" onclick="toggleMenu()">
+      <img src="assets/icons/Burger.svg" alt="Menu" class="burger-icon">
+    </button>
+    <div class="dropdown hidden" id="userMenu">
+      <a href="index.html">Início</a>
+      <a href="profile.html">Perfil</a>
+      <button onclick="logout()">Sair</button>
+    </div>
+  </div>  
+
   <div class="container">
-    <h1 id="moviesTitle">Filmes em Cartaz</h1>
-    <div id="moviesList"></div>
+    <h1 id="moviesTitle" class="auth-only">Filmes em Cartaz</h1>
+    <div id="moviesList" class="auth-only"></div>
   </div>
+
   <!-- Modal -->
   <div id="modal" class="modal hidden">
     <div class="modal-content">
@@ -58,9 +70,10 @@
     </div>
   </div>  
 
-  <script src="js/main.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/movies.js"></script>
   <script>
     loadMovies();
-  </script>
+  </script>  
 </body>
 </html>

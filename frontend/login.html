@@ -7,15 +7,26 @@
 </head>
 <body>
   <div class="container">
-    <h1>CineView</h1>
+    <h1 class="page-title">Login</h1>
+    <p id="loginMsg"></p>
+    
     <form id="loginForm" onsubmit="handleLogin(event)">
       <input type="text" placeholder="Usuário" id="username" required />
       <input type="password" placeholder="Senha" id="password" required />
+      
+      <div class="form-links">
+        <a href="recover.html" class="forgot-password">Esqueceu a senha?</a>
+      </div>
+      
       <button type="submit">Entrar</button>
-      <a href="register.html">Ainda não tem conta? Cadastre-se</a>
     </form>
-    <p id="loginMsg"></p>
+
+    <p class="register-link">
+      Ainda não tem conta? <a href="register.html">Cadastre-se</a>
+    </p>
   </div>
-  <script src="js/main.js"></script>
+
+  <script src="js/utils.js"></script>
+  <script src="js/login.js"></script>
 </body>
 </html>

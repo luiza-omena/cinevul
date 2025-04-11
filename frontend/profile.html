@@ -2,13 +2,13 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>Orders - CineViewExperience</title>
+  <title>Perfil - CineViewExperience</title>
+  <link rel="stylesheet" href="css/profile.css">
   <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="css/orders.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="menu-wrapper auth-only hidden">
+  <div class="menu-wrapper">
     <button class="menu-btn" onclick="toggleMenu()">
       <img src="assets/icons/Burger.svg" alt="Menu" class="burger-icon">
     </button>
@@ -17,14 +17,29 @@
       <a href="movies.html">Filmes</a>
       <button onclick="logout()">Sair</button>
     </div>
-  </div>
+  </div>  
 
   <div class="container">
-    <h1 class="auth-only hidden">Pedidos</h1>
+    <h1 class="auth-only">Meu Perfil</h1>
+    
+    <div id="userInfo" class="user-card auth-only"></div>
 
-    <div class="filters auth-only hidden">
+    <div id="editProfileModal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close" onclick="closeEditModal()">&times;</span>
+        <h3 id="editModalTitle">Editar</h3>
+        <form id="editProfileForm">
+          <input type="text" id="editFieldValue" placeholder="" required />
+          <input type="hidden" id="editFieldType" />
+          <input type="hidden" id="editUserId" />
+          <button type="button" onclick="submitEdit()">Salvar</button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="filters auth-only">
       <div class="search-filters">
-        <input type="text" id="searchInput" placeholder="Buscar por filme, tipo, cadeiras ou usuário...">
+        <input type="text" id="searchInput" placeholder="Buscar por filme, tipo ou cadeiras...">
         <button id="applyFilter" class="filter-btn">➤</button>
       </div>
       <select id="typeFilter">
@@ -34,11 +49,13 @@
       </select>
     </div>
 
-    <div id="activeFilters" class="active-filters auth-only hidden"></div>
+    <div id="activeFilters" class="active-filters auth-only"></div>
 
-    <div id="ordersList" class="auth-only hidden"></div>
+    <h2 class="auth-only" style="margin-top: 2rem;">Meus Pedidos</h2>
+    
+    <div id="userOrders" class="auth-only"></div>
 
-    <div class="pagination auth-only hidden">
+    <div class="pagination auth-only">
       <button id="prevPage">⟨</button>
       <div id="paginationNumbers" class="pagination-numbers"></div>
       <button id="nextPage">⟩</button>
@@ -52,6 +69,9 @@
   </div>
 
   <script src="js/utils.js"></script>
-  <script src="js/orders.js"></script>
+  <script src="js/profile.js"></script>
+  <script>
+    loadUserProfile();
+  </script>
 </body>
 </html>
