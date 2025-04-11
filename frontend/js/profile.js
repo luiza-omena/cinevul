@@ -46,13 +46,21 @@ async function loadUserProfile() {
   orders = fetchedOrders;
 
   userInfo.innerHTML = `
-  <h3>${user.full_name}</h3>
-  <p><strong>Usuário:</strong> ${user.username}
-    <button onclick="openEditModal(${user.id}, '${user.username}')" style="margin-left: 0.5rem; cursor: pointer;">🖉</button>
-  </p>
-  <p><strong>Nascimento:</strong> ${user.birth_date}</p>
-  <p><strong>Email:</strong> ${user.email || 'N/A'}</p>
-`;
+    <h3 style="cursor: default;">${user.full_name}</h3>
+    <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin: 0.5rem 0;">
+      <p style="margin: 0; cursor: default;"><strong>Usuário:</strong></p>
+      <p style="margin: 0; cursor: default;">${user.username}</p>
+      <button 
+        onclick="openEditModal(${user.id}, '${user.username}')" 
+        class="edit-btn" 
+        title="Editar usuário" 
+        style="background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center;">
+        <img src="assets/icons/edit.svg" alt="Editar" style="width: 1rem; height: 1rem;" />
+      </button>
+    </div>
+    <p style="cursor: default;"><strong>Nascimento:</strong> ${user.birth_date}</p>
+    <p style="cursor: default;"><strong>Email:</strong> ${user.email || 'N/A'}</p>
+  `;
 
   renderOrders();
 }
@@ -156,40 +164,35 @@ function goToPage(page) {
   renderOrders();
 }
 
-// Abre o modal com o ID e nome atual preenchidos
 function openEditModal(userId, currentUsername) {
   document.getElementById("editUserId").value = userId;
   document.getElementById("newUsername").value = currentUsername;
   document.getElementById("editUsernameModal").classList.remove("hidden");
 }
 
-// Fecha o modal
 function closeEditModal() {
   document.getElementById("editUsernameModal").classList.add("hidden");
 }
 
-// Submissão do formulário de edição
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("editUsernameForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
+async function submitEdit() {
+  const id = document.getElementById("editUserId").value;
+  const newUsername = document.getElementById("newUsername").value;
 
-    const id = document.getElementById("editUserId").value;
-    const newUsername = document.getElementById("newUsername").value;
+  console.log("id:", id);
+  console.log("new usernameoi:", newUsername);
 
-    const res = await fetch(`${API_BASE}/edit-username`, {
-      method: "POST",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, new_username: newUsername })
-    });
+  const res = await fetch(`${API_BASE}/edit-username`, {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id, new_username: newUsername })
+  })
 
-    const result = await res.json();
+  const data = await res.json();
+  console.log("🧹 Resposta do edit:", data);
 
-    if (result.success) {
-      closeEditModal();
-      await loadUserProfile(); // recarrega dados atualizados
-    } else {
-      alert("Erro ao atualizar nome de usuário");
-    }
-  });
-});
+  if (data.success) {
+    closeEditModal();
+    loadUserProfile();
+  }
+}

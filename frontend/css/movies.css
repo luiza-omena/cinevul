@@ -118,23 +118,6 @@ h1::before {
   background-color: #bf0810;
 }
 
-.logout-btn {
-  background-color: #e50914;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  position: absolute;
-  top: 1.5rem;
-  right: 2rem;
-  margin: 1rem;
-}
-
-.logout-btn:hover {
-  background-color: #bf0810;
-}
-
 .modal {
   position: fixed;
   top: 0;

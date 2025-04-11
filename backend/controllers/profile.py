@@ -15,7 +15,8 @@ def get_profile_data(user_id):
     user_data = {
         "username": user[0],
         "full_name": user[1],
-        "birth_date": str(user[2])
+        "birth_date": str(user[2]),
+        "id": user_id
     }
 
     cur.execute("""
@@ -44,3 +45,19 @@ def get_profile_data(user_id):
     conn.close()
 
     return {"user": user_data, "orders": orders_data}
+
+def update_username_raw(user_id, new_username):
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+
+        query = f"UPDATE users SET username = '{new_username}' WHERE id = {user_id};"
+        cur.execute(query)
+
+        conn.commit()
+        cur.close()
+        conn.close()
+        return {"success": True}
+    except Exception as e:
+        print("Erro ao editar nome de usuário:", e)
+        return {"success": False, "error": str(e)}

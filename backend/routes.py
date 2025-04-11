@@ -4,7 +4,7 @@ from controllers.movies import get_movies
 from controllers.orders import create_order, get_all_orders_with_movies
 from controllers.dashboard import get_dashboard_data
 from controllers.session import generate_token, get_user_from_token, is_authenticated, logout_user
-from controllers.profile import get_profile_data
+from controllers.profile import get_profile_data, update_username_raw
 
 ALLOWED_ORIGIN = "http://localhost:5500"
 
@@ -101,6 +101,14 @@ def handle_post(handler):
         handler.end_headers()
         handler.wfile.write(json.dumps({"success": True}).encode())
         return
+    elif handler.path.startswith("/edit-username"):
+        user_id = post_data.get("id")
+        new_username = post_data.get("new_username")
+        response = update_username_raw(user_id, new_username)
+        code = 200 if response.get("success") else 401
+        handler.send_response(code)
+
+
     else:
         response = {"error": "Not Found"}
         handler.send_response(404)

@@ -16,3 +16,23 @@ async function logout() {
     }, 500);
   }
 }
+
+function toggleMenu() {
+  const menu = document.getElementById("userMenu");
+  menu.classList.toggle("hidden");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("click", (event) => {
+    const menu = document.getElementById("userMenu");
+    const btn = document.querySelector(".menu-btn");
+    if (!menu || !btn) return;
+
+    if (!menu.contains(event.target) && !btn.contains(event.target)) {
+      menu.classList.add("hidden");
+    }
+  });
+});
+
+window.toggleMenu = toggleMenu;
+window.logout = logout;

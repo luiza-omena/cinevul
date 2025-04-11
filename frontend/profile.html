@@ -4,10 +4,20 @@
   <meta charset="UTF-8">
   <title>Perfil - CineViewExperience</title>
   <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="css/global.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 <body>
-  <button class="logout-btn" onclick="logout()">Sair</button>
+  <div class="menu-wrapper">
+    <button class="menu-btn" onclick="toggleMenu()">
+      <img src="assets/icons/Burger.svg" alt="Menu" class="burger-icon">
+    </button>
+    <div class="dropdown hidden" id="userMenu">
+      <a href="index.html">Início</a>
+      <a href="movies.html">Filmes</a>
+      <button onclick="logout()">Sair</button>
+    </div>
+  </div>  
 
   <div class="container">
     <h1>Meu Perfil</h1>
@@ -21,7 +31,7 @@
         <form id="editUsernameForm">
           <input type="text" id="newUsername" placeholder="Novo nome de usuário" required>
           <input type="hidden" id="editUserId">
-          <button type="submit">Salvar</button>
+          <button type="button" onclick="submitEdit()">Salvar</button>
         </form>
       </div>
     </div>
