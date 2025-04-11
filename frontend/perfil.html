@@ -2,19 +2,26 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>Admin - CineViewExperience</title>
-  <link rel="stylesheet" href="css/admin.css">
+  <title>Perfil - CineViewExperience</title>
+  <link rel="stylesheet" href="css/profile.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 <body>
   <button class="logout-btn" onclick="logout()">Sair</button>
 
   <div class="container">
-    <h1>Painel Admin</h1>
-    <div id="ordersList"></div>
+    <h1>Meu Perfil</h1>
+
+    <div id="userInfo" class="user-card"></div>
+
+    <h2 style="margin-top: 2rem;">Meus Pedidos</h2>
+    <div id="userOrders"></div>
   </div>
 
   <script src="js/utils.js"></script>
-  <script src="js/admin.js"></script>
+  <script src="js/profile.js"></script>  
+  <script>
+    loadUserProfile();
+  </script>
 </body>
 </html>

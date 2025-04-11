@@ -4,7 +4,7 @@ from controllers.movies import get_movies
 from controllers.orders import create_order, get_all_orders_with_movies
 from controllers.dashboard import get_dashboard_data
 from controllers.session import generate_token, get_user_from_token, is_authenticated, logout_user
-
+from controllers.profile import get_profile_data
 
 ALLOWED_ORIGIN = "http://localhost:5500"
 
@@ -50,7 +50,13 @@ def handle_get(handler):
         response = get_dashboard_data()
     elif handler.path.startswith("/admin/orders"):
         response = get_all_orders_with_movies()
-
+    elif handler.path.startswith("/profile"):
+        if not is_authenticated(token):
+            handler.send_response(401)
+            response = {"error": "Usuário não autenticado"}
+        else:
+            user_id = get_user_from_token(token)
+            response = get_profile_data(user_id)
     else:
         handler.send_response(404)
         response = {"error": "Not Found"}
