@@ -1,17 +1,252 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Cinema Online</title>
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="description" content="Cine View Experience - Descubra o que está rolando no cinema e garanta seu ingresso!">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cine View Experience - Início</title>
+  
+  <link rel="stylesheet" href="css/global.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  
+  <style>
+    .hero {
+      position: relative;
+      height: 100vh;
+      background: linear-gradient(rgba(20,20,20,1), rgba(20,20,20,0.9)), url('assets/images/banners.jpg') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .hero .content {
+      max-width: 800px;
+    }
+    .hero h1 {
+      font-size: 5rem;
+      color: rgba(229, 9, 20, 0.3);
+      opacity: 0;
+      animation: fadeInDown 2s forwards;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero p {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      opacity: 0;
+      animation: fadeInUp 1.5s forwards;
+      animation-delay: 1.5s;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero .btn {
+      display: inline-block;
+      margin-top: 2rem;
+      background-color: #e50914;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 4px;
+      border: none;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: background-color 0.25s ease;
+    }
+    .hero .btn:hover {
+      background-color: #bf0810;
+    }
+
+    .features {
+    padding: 4rem 1rem;
+    text-align: center;
+    background-color: #1c1c1c;
+    }
+
+    .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    letter-spacing: 1px;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    }
+
+    .features > p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    color: #e0e0e0;
+    }
+
+    .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    }
+
+    .feature-card {
+    background-color: #2a2a2a;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+    }
+
+    .feature-card:hover {
+    transform: translateY(-5px);
+    }
+
+    .feature-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: #e50914;
+    }
+
+    .feature-card p {
+    font-size: 1rem;
+    color: #e0e0e0;
+    line-height: 1.5;
+    }
+
+  </style>
 </head>
 <body>
-    <h1>Bem-vindo ao CineViewExperience!</h1>
-    <a href="login.html">Login</a>
-    <a href="movies.html">Filmes</a>
-    <a href="orders.html">Pedidos</a>
-    <a href="dashboard.html">Dashboard</a>
+  <div class="menu-wrapper auth-only hidden" id="menuAuth">
+    <button class="menu-btn" onclick="toggleMenu()">
+      <img src="assets/icons/Burger.svg" alt="Menu" class="burger-icon">
+    </button>
+    <div class="dropdown hidden" id="userMenu">
+      <a href="index.html">Início</a>
+      <a href="movies.html">Filmes</a>
+      <a href="about.html">Sobre</a>
+      <a href="profile.html">Perfil</a>
+      <button onclick="logout()">Sair</button>
+    </div>
+  </div>
 
-    <script src="js/main.js"></script>
-</body>
+  <div class="menu-wrapper unauth-only hidden" id="menuUnauth">
+    <button class="menu-btn" onclick="toggleMenuUnauth()">
+      <img src="assets/icons/Burger.svg" alt="Menu" class="burger-icon">
+    </button>
+    <div class="dropdown hidden" id="userMenuUnauth">
+      <a href="index.html">Início</a>
+      <a href="about.html">Sobre</a>
+      <a href="login.html">Login</a>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="content">
+      <h1>Cine View Experience</h1>
+      <p>
+        Explore os filmes em cartaz e garanta seu ingresso com facilidade. E se a sigla CVE te soa familiar... é porque aqui, nada é por acaso.
+        Afinal, onde mais você encontraria um CVE que envolve pipoca?
+      </p>            
+      <a href="movies.html" class="btn">Ver Filmes</a>
+    </div>
+  </section>
+  
+  <section class="features">
+    <h2 class="section-title">O que você encontra por aqui</h2>
+    <p>
+      Uma plataforma feita pra quem curte praticidade. Tudo que você precisa está a poucos cliques: escolha seu filme, veja os detalhes e finalize sua compra direto por aqui.
+    </p>
+  
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>🎬 Filmes em cartaz</h3>
+        <p>Confira os lançamentos disponíveis, com banners, títulos e detalhes pra ajudar na sua escolha.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🛒 Compra de ingressos</h3>
+        <p>Escolha tipo e quantidade de ingressos e finalize tudo de forma rápida e simples.</p>
+      </div>
+      <div class="feature-card">
+        <h3>📅 Sessões organizadas</h3>
+        <p>As exibições são exibidas de forma clara pra você encontrar o horário ideal com facilidade.</p>
+      </div>
+      <div class="feature-card">
+        <h3>👤 Área do usuário</h3>
+        <p>Acesse seus pedidos, veja seus dados e acompanhe tudo em um só lugar.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🎟️ Tipos de ingresso</h3>
+        <p>Escolha entre ingresso inteiro ou meia-entrada e envie comprovantes quando necessário.</p>
+      </div>
+      <div class="feature-card">
+        <h3>💬 Experiência direta</h3>
+        <p>Sem burocracia: o site é direto, funcional e feito pra quem quer agilidade na hora de garantir o ingresso.</p>
+      </div>
+    </div>
+  </section>  
+
+  <script src="js/utils.js"></script>
+  <script>
+    isUserLoggedIn().then((loggedIn) => {
+      adjustMenus(loggedIn);
+    });
+  
+    function adjustMenus(isLoggedIn) {
+      if (isLoggedIn) {
+        document.getElementById("menuAuth").classList.remove("hidden");
+        document.getElementById("menuUnauth").classList.add("hidden");
+      } else {
+        document.getElementById("menuUnauth").classList.remove("hidden");
+        document.getElementById("menuAuth").classList.add("hidden");
+      }
+    }
+  
+    function toggleMenuUnauth() {
+      const menu = document.getElementById("userMenuUnauth");
+      menu.classList.toggle("hidden");
+    }
+    window.toggleMenuUnauth = toggleMenuUnauth;
+
+    window.addEventListener("load", () => {
+    const hero = document.querySelector(".hero");
+    const title = hero.querySelector("h1");
+    const text = hero.querySelector("p");
+
+    const titleDuration = 1000;
+    const textDelay = 1000;
+    const textDuration = 1000;
+
+    const totalDelay = titleDuration + textDelay + textDuration;
+
+    setTimeout(() => {
+      smoothScrollBy(250, 1000);
+    }, totalDelay);
+  });
+
+  function smoothScrollBy(targetY, duration) {
+    const startY = window.scrollY;
+    const endY = startY + targetY;
+    const startTime = performance.now();
+
+    function scrollStep(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      const ease = progress < 0.5
+        ? 2 * progress * progress
+        : -1 + (4 - 2 * progress) * progress;
+
+      window.scrollTo(0, startY + (endY - startY) * ease);
+
+      if (elapsed < duration) {
+        requestAnimationFrame(scrollStep);
+      }
+    }
+
+    requestAnimationFrame(scrollStep);
+  }
+  </script>  
 </html>

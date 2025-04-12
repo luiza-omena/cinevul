@@ -1,18 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <title>Dashboard - CineVul</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8">
+  <title>Dashboard - CineViewExperience</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>Dashboard do Admin</h1>
-    <div id="dashboardData"></div>
+  <div class="menu-wrapper auth-only">
+    <button class="menu-btn" onclick="toggleMenu()">
+      <img src="assets/icons/Burger.svg" alt="Menu" class="burger-icon">
+    </button>
+    <div class="dropdown hidden" id="userMenu">
+      <a href="index.html">Início</a>
+      <a href="profile.html">Perfil</a>
+      <a href="users.html">Usuários</a>
+      <a href="orders.html">Pedidos</a>
+      <button onclick="logout()">Sair</button>
+    </div>
   </div>
-  <script src="js/main.js"></script>
-  <script>
-    loadDashboard();
-  </script>
+
+  <div class="container">
+    <h1>Dashboard</h1>
+
+    <div class="dashboard-links">
+      <a href="users.html" class="dashboard-btn">Gerenciar Usuários</a>
+      <a href="orders.html" class="dashboard-btn">Ver Pedidos</a>
+    </div>
+
+    <div class="charts-container">
+      <div class="chart-wrapper">
+        <h2>Faturamento Mensal</h2>
+        <canvas id="revenueChart"></canvas>
+      </div>
+      <div class="chart-wrapper">
+        <h2>Estatísticas</h2>
+        <canvas id="statsChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+  <script src="js/utils.js"></script>
 </body>
 </html>
