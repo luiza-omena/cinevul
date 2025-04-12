@@ -8,49 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="menu-wrapper auth-only hidden">
-    <button class="menu-btn" onclick="toggleMenu()">
-      <img src="assets/icons/Burger.svg" alt="Menu" class="burger-icon">
-    </button>
-    <div class="dropdown hidden" id="userMenu">
-      <a href="index.html">Início</a>
-      <a href="movies.html">Filmes</a>
-      <button onclick="logout()">Sair</button>
-    </div>
-  </div>
-
-  <div class="container">
-    <h1 class="auth-only hidden">Pedidos</h1>
-
-    <div class="filters auth-only hidden">
-      <div class="search-filters">
-        <input type="text" id="searchInput" placeholder="Buscar por filme, tipo, cadeiras ou usuário...">
-        <button id="applyFilter" class="filter-btn">➤</button>
-      </div>
-      <select id="typeFilter">
-        <option value="">Todos os tipos</option>
-        <option value="inteira">Inteira</option>
-        <option value="meia">Meia</option>
-      </select>
-    </div>
-
-    <div id="activeFilters" class="active-filters auth-only hidden"></div>
-
-    <div id="ordersList" class="auth-only hidden"></div>
-
-    <div class="pagination auth-only hidden">
-      <button id="prevPage">⟨</button>
-      <div id="paginationNumbers" class="pagination-numbers"></div>
-      <button id="nextPage">⟩</button>
-      <select id="perPageSelect" class="per-page-select">
-        <option value="5">5 por página</option>
-        <option value="10" selected>10 por página</option>
-        <option value="20">20 por página</option>
-        <option value="50">50 por página</option>
-      </select>
-    </div>
-  </div>
-
   <script src="js/utils.js"></script>
   <script src="js/orders.js"></script>
 </body>

@@ -60,3 +60,8 @@
   max-width: 800px;
   flex-wrap: wrap;
 }
+
+.proof-frame {
+  margin-top: 0.4rem;
+  height: 40px;
+}

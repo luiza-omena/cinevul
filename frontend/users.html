@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Usuários - Dashboard CineView</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/users.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="menu-wrapper auth-only">
+    <button class="menu-btn" onclick="toggleMenu()">
+      <img src="assets/icons/Burger.svg" alt="Menu" class="burger-icon">
+    </button>
+    <div class="dropdown hidden" id="userMenu">
+      <a href="index.html">Início</a>
+      <a href="movies.html">Filmes</a>
+      <a href="orders.html">Pedidos</a>
+      <button onclick="logout()">Sair</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Usuários</h1>
+
+    <div class="filters users-filters auth-only">
+      <div class="search-filters">
+        <input type="text" id="searchInput" placeholder="Buscar por nome, usuário, email ou celular...">
+        <button id="applyFilter" class="filter-btn">➤</button>
+      </div>
+      <select id="typeFilter">
+        <option value="">Todos</option>
+        <option value="admin">Admin</option>
+        <option value="naoadmin">Não Admin</option>
+      </select>
+    </div>
+    
+
+    <div id="activeFilters" class="active-filters auth-only"></div>
+    <div id="usersList" class="auth-only"></div>
+
+    <div class="pagination auth-only">
+      <button id="prevPage">⟨</button>
+      <div id="paginationNumbers" class="pagination-numbers"></div>
+      <button id="nextPage">⟩</button>
+      <select id="perPageSelect" class="per-page-select">
+        <option value="5">5 por página</option>
+        <option value="10" selected>10 por página</option>
+        <option value="20">20 por página</option>
+        <option value="50">50 por página</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="deleteModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" onclick="closeDeleteModal()">&times;</span>
+      <h3>Confirmar Exclusão</h3>
+      <p>Tem certeza que deseja excluir este usuário?</p>
+      <div class="modal-actions">
+        <button id="confirmDelete">Excluir</button>
+        <button id="cancelDelete">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/users.js"></script>
+  <script src="js/utils.js"></script>
+</body>
+</html>
