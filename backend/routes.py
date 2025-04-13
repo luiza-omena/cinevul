@@ -1,7 +1,9 @@
+# routes.py
+
 import json
 import os
 from controllers.auth import login, register, reset_password, verify_user
-from controllers.movies import get_movies
+from controllers.movies import get_movies, create_movie, update_movie, delete_movie
 from controllers.orders import create_order, get_all_orders_with_movies
 from controllers.dashboard import delete_user, get_admin_stats, get_all_users, is_admin
 from controllers.session import generate_token, get_user_from_token, is_authenticated, logout_user
@@ -38,6 +40,15 @@ def handle_get(handler):
         else:
             response = get_movies()
 
+    elif handler.path.startswith("/admin/movies"):
+        user_id = get_user_from_token(token)
+        if not is_authenticated(token) or not is_admin(user_id):
+            response = {"error": "Acesso negado"}
+            code = 403
+        else:
+            response = get_movies()
+            code = 200
+
     elif handler.path.startswith("/dashboard"):
         if not is_authenticated(token):
             response = {"error": "Usuário não autenticado"}
@@ -65,7 +76,7 @@ def handle_get(handler):
         response = get_admin_stats(user_id)
         if "error" in response:
             code = 403
-    
+
     elif handler.path.startswith("/devtools"):
         return handle_devtools(handler)
 
@@ -93,7 +104,7 @@ def handle_get(handler):
     handler.send_response(code)
     add_cors_headers(handler)
     handler.send_header("Content-Type", "application/json")
-    handler.send_header("Set-Cookie", f"token={token}; Path=/; HttpOnly; SameSite=None")
+    handler.send_header("Set-Cookie", f"token={token}; Path=/; HttpOnly; SameSite=Lax")
     handler.end_headers()
     handler.wfile.write(json.dumps(response).encode())
 
@@ -107,7 +118,7 @@ def handle_post(handler):
         response = login(post_data, token)
         code = 200 if response.get("success") else 401
         handler.send_response(code)
-        handler.send_header("Set-Cookie", f"token={token}; Path=/; HttpOnly; SameSite=None")
+        handler.send_header("Set-Cookie", f"token={token}; Path=/; HttpOnly; SameSite=Lax")
 
     elif handler.path.startswith("/register"):
         response = register(post_data)
@@ -125,11 +136,11 @@ def handle_post(handler):
         handler.send_response(200)
         add_cors_headers(handler)
         handler.send_header("Content-Type", "application/json")
-        handler.send_header("Set-Cookie", f"token={new_token}; Path=/; HttpOnly; SameSite=None")
+        handler.send_header("Set-Cookie", f"token={new_token}; Path=/; HttpOnly; SameSite=Lax")
         handler.end_headers()
         handler.wfile.write(json.dumps({"success": True}).encode())
         return
-    
+
     elif handler.path.startswith("/edit-username"):
         user_id = post_data["id"]
         new_username = post_data["value"]
@@ -140,11 +151,10 @@ def handle_post(handler):
     elif handler.path.startswith("/edit-email"):
         response = update_profile_field(post_data["id"], "email", post_data["value"])
         handler.send_response(200 if response.get("success") else 400)
-        
+
     elif handler.path.startswith("/edit-phone"):
         response = update_profile_field(post_data["id"], "phone", post_data["value"])
         handler.send_response(200 if response.get("success") else 400)
-
 
     elif handler.path.startswith("/recover/verify"):
         response = verify_user(post_data)
@@ -157,6 +167,34 @@ def handle_post(handler):
     elif handler.path.startswith("/admin/delete-user"):
         response = delete_user(post_data["id"])
         handler.send_response(200)
+
+    elif handler.path.startswith("/admin/movies/create"):
+        user_id = get_user_from_token(token)
+        if not is_authenticated(token) or not is_admin(user_id):
+            response = {"error": "Acesso negado"}
+            handler.send_response(403)
+        else:
+            response = create_movie(post_data)
+            handler.send_response(201 if response.get("success") else 400)
+
+    elif handler.path.startswith("/admin/movies/edit"):
+        user_id = get_user_from_token(token)
+        if not is_authenticated(token) or not is_admin(user_id):
+            response = {"error": "Acesso negado"}
+            handler.send_response(403)
+        else:
+            response = update_movie(post_data)
+            handler.send_response(200 if response.get("success") else 400)
+
+    elif handler.path.startswith("/admin/movies/delete"):
+        user_id = get_user_from_token(token)
+        if not is_authenticated(token) or not is_admin(user_id):
+            response = {"error": "Acesso negado"}
+            handler.send_response(403)
+        else:
+            movie_id = post_data.get("id")
+            response = delete_movie(movie_id)
+            handler.send_response(200 if response.get("success") else 400)
 
     else:
         response = {"error": "Not Found"}

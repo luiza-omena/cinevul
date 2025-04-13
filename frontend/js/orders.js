@@ -137,6 +137,7 @@ function renderPage() {
         <a href="index.html">Início</a>
         <a href="movies.html">Filmes</a>
         <a href="users.html">Usuários</a>
+        <a href="dashboard-movies.html">Gerenciar Filmes</a>
         <button onclick="logout()">Sair</button>
       </div>
     </div>

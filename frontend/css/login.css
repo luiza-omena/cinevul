@@ -25,6 +25,11 @@ body {
   max-width: 400px;
   text-align: center;
   margin: auto;
+  min-height: fit-content;
+  max-height: 90vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #e50914 #1c1c1c;
 }
 
 .page-title,
@@ -32,7 +37,7 @@ h1 {
   color: #e50914;
   font-size: 3.5rem;
   font-family: 'Bebas Neue', 'Inter', sans-serif;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   position: relative;
   text-align: center;
 }
@@ -57,12 +62,13 @@ form {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  gap: 0.5rem;
 }
 
 form input {
   width: 100%;
   padding: 0.75rem;
-  margin: 0.5rem 0;
+  margin: 0.25rem 0;
   border: none;
   border-radius: 4px;
   background-color: #333;
@@ -76,6 +82,27 @@ form input:focus {
   box-shadow: 0 0 6px rgba(229, 9, 20, 0.6);
 }
 
+input[type="date"] {
+  text-align: center;
+  display: block;
+  width: 100%;
+  background-color: #333;
+  padding: 0.75rem;
+  border-radius: 4px;
+  color: white;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+input[type="date"]::-webkit-datetime-edit {
+  text-align: center;
+  width: 100%;
+}
+
+input[type="date"] {
+  text-align: -moz-center;
+}
+
 button {
   background-color: #e50914;
   color: white;
@@ -84,7 +111,7 @@ button {
   border-radius: 4px;
   width: 100%;
   cursor: pointer;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   font-weight: bold;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -119,81 +146,33 @@ a:hover {
 
 #loginMsg,
 #registerMsg {
-  margin-bottom: 1.5rem;
-  font-size: 1rem;
+  margin: 0.5rem 0 1rem;
+  font-size: 0.9rem;
   width: 100%;
   text-align: center;
-  animation: fadeIn 0.3s ease-in-out;
-  padding: 12px 16px;
-  border-radius: 6px;
-  font-weight: 600;
-}
-
-#recoverMsg {
-  margin-bottom: 1.5rem;
-  font-size: 0.95rem;
-  width: 100%;
-  text-align: center;
-  padding: 12px 16px;
-  border-radius: 6px;
-  font-weight: 600;
-  animation: fadeIn 0.3s ease-in-out;
+  padding: 10px 12px;
+  border-radius: 4px;
+  font-weight: 500;
+  line-height: 1.4;
+  border-left: 3px;
 }
 
 .success-msg {
-  color: #00e676;
-  background: linear-gradient(90deg, #1f3d2e, #173322);
-  border: 1px solid #00e676;
-  box-shadow: 0 0 12px rgba(0, 230, 118, 0.4);
+  color: #a0ffc8;
+  background-color: rgba(0, 230, 118, 0.1);
+  border-left-color: #00e676 !important;
 }
 
 .error-msg {
-  color: #ff4c4c;
-  background: linear-gradient(90deg, #3c1f1f, #421b1b);
-  border: 1px solid #ff4c4c;
-  box-shadow: 0 0 12px rgba(255, 76, 76, 0.3);
-}
-
-.confirmation {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 2rem 1rem;
-  background-color: #121212;
-  border-radius: 8px;
-  margin-top: 2rem;
-  box-shadow: 0 0 15px rgba(229, 9, 20, 0.3);
-}
-
-.confirmation h2 {
-  color: #e50914;
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
-  text-shadow: 0 0 8px rgba(229, 9, 20, 0.5);
-}
-
-.confirmation p {
-  font-size: 1rem;
-  color: #fff;
-  opacity: 0.9;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  color: #ff9e9e;
+  background-color: rgba(255, 76, 76, 0.1);
+  border-left-color: #ff4c4c !important;
 }
 
 .form-links {
   width: 100%;
   text-align: right;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .forgot-password {
@@ -226,4 +205,34 @@ a:hover {
 .register-link a:hover {
   color: #ff3c3c;
   text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 90%;
+    padding: 1.5rem;
+    max-height: 90vh;
+  }
+  
+  h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  #loginMsg,
+  #registerMsg {
+    font-size: 0.85rem;
+    padding: 8px 10px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

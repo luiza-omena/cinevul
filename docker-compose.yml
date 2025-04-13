@@ -12,6 +12,10 @@ services:
     volumes:
       - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./scripts/init_movies.sql:/docker-entrypoint-initdb.d/init_movies.sql
+      - ./scripts/init_admin.sql:/docker-entrypoint-initdb.d/init_admin.sql
+      - ./scripts/init_users.sql:/docker-entrypoint-initdb.d/init_users.sql
+      - ./scripts/init_orders.sql:/docker-entrypoint-initdb.d/init_orders.sql
+      
 
 
   backend:

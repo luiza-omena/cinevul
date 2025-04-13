@@ -77,6 +77,7 @@ async function loadAdminUsers() {
     }
 
     toggleAuthVisibility(true);
+    console.log("data", data)
     users = data;
     renderUsers();
   } catch (err) {
@@ -122,47 +123,57 @@ function removeFilter(key) {
 
 function renderUsers() {
   const userList = document.getElementById("usersList");
-
   let filtered = [...users];
-
   if (activeFilters.search) {
     const search = activeFilters.search.toLowerCase();
-    filtered = filtered.filter(u =>
-      u.full_name.toLowerCase().includes(search) ||
-      u.username.toLowerCase().includes(search) ||
-      (u.email && u.email.toLowerCase().includes(search)) ||
-      (u.phone && u.phone.toLowerCase().includes(search))
-    );
+    filtered = filtered.filter(u => {
+      const fullName = (u.full_name || "").toLowerCase();
+      const username = (u.username || "").toLowerCase();
+      const email = (u.email || "").toLowerCase();
+      // Se u.phone for string ou número, converte para string; se não, usa string vazia para o filtro
+      const phoneStr = (typeof u.phone === "string" || typeof u.phone === "number")
+        ? String(u.phone).toLowerCase()
+        : "";
+      return fullName.includes(search) || username.includes(search) || email.includes(search) || phoneStr.includes(search);
+    });
   }
 
   if (activeFilters.type) {
     if (activeFilters.type === "admin") {
-      filtered = filtered.filter(u => u.is_admin);
+      filtered = filtered.filter(u => u.is_admin === true);
     } else if (activeFilters.type === "naoadmin") {
-      filtered = filtered.filter(u => !u.is_admin);
+      filtered = filtered.filter(u => u.is_admin === false);
     }
   }
 
+  console.log("Usuários filtrados:", filtered);
+  
   const totalPages = Math.ceil(filtered.length / usersPerPage);
   currentPage = Math.max(1, Math.min(currentPage, totalPages));
-
   const start = (currentPage - 1) * usersPerPage;
   const end = start + usersPerPage;
   const pageUsers = filtered.slice(start, end);
 
-  userList.innerHTML = pageUsers.map(u => `
-    <div class="user-card">
-      <div class="user-info">
-        <p><strong>${u.full_name}</strong> (${u.username})</p>
-        <p>Email: ${u.email}</p>
-        <p>Celular: ${u.phone || "N/A"}</p>
+  userList.innerHTML = pageUsers.map(u => {
+    // Se u.phone for string ou número, exibe ele; caso contrário, exibe "N/A"
+    const phoneDisplay = (typeof u.phone === "string" || typeof u.phone === "number")
+      ? u.phone
+      : "N/A";
+    return `
+      <div class="user-card">
+        <div class="user-info">
+          <p><strong>${u.full_name}</strong> (${u.username})</p>
+          <p>Email: ${u.email}</p>
+          <p>Celular: ${phoneDisplay}</p>
+        </div>
+        <button onclick="deleteUser(${u.id})" class="delete-btn">Excluir</button>
       </div>
-      <button onclick="deleteUser(${u.id})" class="delete-btn">Excluir</button>
-    </div>
-  `).join("");
+    `;
+  }).join("");
 
   renderPagination(totalPages);
 }
+
 
 function renderPagination(totalPages) {
   const paginationNumbers = document.getElementById("paginationNumbers");

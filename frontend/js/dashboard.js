@@ -1,54 +1,59 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    try {
-      const res = await fetch(`${API_BASE}/admin/stats`, { credentials: "include" });
-      const data = await res.json();
-      const menuWrapper = document.querySelector(".menu-wrapper");
-      const container = document.querySelector(".container");
-  
-      if (data.error) {
-        toggleAuthVisibility(false);
-        menuWrapper.classList.add("hidden");
-        container.classList.add("hidden");
-  
-        const errorDiv = document.createElement("div");
-        errorDiv.innerHTML = `
-          <div class="center-message">
-            <div class="unauth-container">
-              <h2>Acesso não autorizado</h2>
-              <p>Esta página é restrita a administradores.</p>
-              <a class="login-btn" href="login.html">Fazer login</a>
-            </div>
-          </div>
-        `;
-  
-        document.body.appendChild(errorDiv);
-        return;
-      }
-  
-      toggleAuthVisibility(true);
-      renderRevenueChart(data.monthlyRevenue);
-      renderStatsChart(data.totals);
-    } catch (err) {
-      console.error("Erro no dashboard:", err);
-      const menuWrapper = document.querySelector(".menu-wrapper");
-      const container = document.querySelector(".container");
-  
+  try {
+    const res = await fetch(`${API_BASE}/admin/stats`, { credentials: "include" });
+    const data = await res.json();
+    const menuWrapper = document.querySelector(".menu-wrapper");
+    const container = document.querySelector(".container");
+
+    if (data.error) {
       toggleAuthVisibility(false);
       menuWrapper.classList.add("hidden");
       container.classList.add("hidden");
-  
+
       const errorDiv = document.createElement("div");
       errorDiv.innerHTML = `
         <div class="center-message">
           <div class="unauth-container">
-            <h2>Erro ao carregar dados</h2>
-            <p>Tente novamente mais tarde.</p>
+            <h2>Acesso não autorizado</h2>
+            <p>Esta página é restrita a administradores.</p>
+            <a class="login-btn" href="login.html">Fazer login</a>
           </div>
         </div>
       `;
       document.body.appendChild(errorDiv);
+      return;
     }
-  });
+
+    toggleAuthVisibility(true);
+
+    if (typeof Chart !== "undefined") {
+      renderRevenueChart(data.monthlyRevenue);
+      renderStatsChart(data.totals);
+    } else {
+      renderChartFallback();
+    }
+
+  } catch (err) {
+    console.error("Erro no dashboard:", err);
+    const menuWrapper = document.querySelector(".menu-wrapper");
+    const container = document.querySelector(".container");
+
+    toggleAuthVisibility(false);
+    menuWrapper.classList.add("hidden");
+    container.classList.add("hidden");
+
+    const errorDiv = document.createElement("div");
+    errorDiv.innerHTML = `
+      <div class="center-message">
+        <div class="unauth-container">
+          <h2>Erro ao carregar dados</h2>
+          <p>Tente novamente mais tarde.</p>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(errorDiv);
+  }
+});
   
   function renderRevenueChart(monthlyRevenue) {
     const ctx = document.getElementById("revenueChart").getContext("2d");
@@ -95,5 +100,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         scales: { y: { beginAtZero: true } }
       }
     });
+  }
+  
+  function renderChartFallback() {
+    const chartsContainer = document.querySelector(".charts-container");
+  
+    if (chartsContainer) {
+      chartsContainer.innerHTML = `
+        <div class="chart-wrapper">
+          <h2>Faturamento Mensal</h2>
+          <div class="chart-error">Gráfico não disponível (Chart.js não carregado) - tente outro navegador</div>
+        </div>
+        <div class="chart-wrapper">
+          <h2>Estatísticas</h2>
+          <div class="chart-error">Gráfico não disponível (Chart.js não carregado) - tente outro navegador</div>
+        </div>
+      `;
+    }
   }
   
