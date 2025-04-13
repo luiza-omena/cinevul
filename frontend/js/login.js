@@ -22,11 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const msg = document.getElementById("loginMsg");
   
     if (data.success) {
-      msg.style.color = "lightgreen";
       msg.textContent = "Login realizado com sucesso!";
-      setTimeout(() => window.location.href = "movies.html", 300);
+      msg.className = "success-msg";
+      setTimeout(() => window.location.href = "movies.html", 200);
     } else {
-      msg.style.color = "#e50914";
       msg.textContent = "Usuário ou senha incorretos.";
+      msg.className = "error-msg";
     }
   }  

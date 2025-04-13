@@ -1,3 +1,7 @@
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username TEXT UNIQUE NOT NULL,
@@ -23,12 +27,14 @@ CREATE TABLE movies (
 
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY,
-  user_id INT REFERENCES users(id),
-  movie_id INT REFERENCES movies(id),
+  user_id INT NOT NULL,
+  movie_id INT NOT NULL,
   quantity INT NOT NULL,
   type TEXT NOT NULL,
   proof TEXT,
   total_price NUMERIC(10,2),
   seats TEXT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT orders_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  CONSTRAINT orders_movie_id_fkey FOREIGN KEY (movie_id) REFERENCES movies(id) ON DELETE CASCADE
 );

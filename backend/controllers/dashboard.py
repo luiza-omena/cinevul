@@ -16,7 +16,7 @@ def get_all_users(requester_id):
 
     conn = get_connection()
     cur = conn.cursor()
-    cur.execute("SELECT id, username, full_name, email, is_admin, phone FROM users")
+    cur.execute("SELECT id, username, full_name, email, phone, is_admin FROM users")
     users = cur.fetchall()
     cur.close()
     conn.close()
