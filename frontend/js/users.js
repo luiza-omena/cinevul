@@ -77,7 +77,6 @@ async function loadAdminUsers() {
     }
 
     toggleAuthVisibility(true);
-    console.log("data", data)
     users = data;
     renderUsers();
   } catch (err) {
@@ -130,7 +129,6 @@ function renderUsers() {
       const fullName = (u.full_name || "").toLowerCase();
       const username = (u.username || "").toLowerCase();
       const email = (u.email || "").toLowerCase();
-      // Se u.phone for string ou número, converte para string; se não, usa string vazia para o filtro
       const phoneStr = (typeof u.phone === "string" || typeof u.phone === "number")
         ? String(u.phone).toLowerCase()
         : "";
@@ -146,7 +144,6 @@ function renderUsers() {
     }
   }
 
-  console.log("Usuários filtrados:", filtered);
   
   const totalPages = Math.ceil(filtered.length / usersPerPage);
   currentPage = Math.max(1, Math.min(currentPage, totalPages));
@@ -155,7 +152,6 @@ function renderUsers() {
   const pageUsers = filtered.slice(start, end);
 
   userList.innerHTML = pageUsers.map(u => {
-    // Se u.phone for string ou número, exibe ele; caso contrário, exibe "N/A"
     const phoneDisplay = (typeof u.phone === "string" || typeof u.phone === "number")
       ? u.phone
       : "N/A";

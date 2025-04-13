@@ -1,4 +1,3 @@
-
 INSERT INTO orders (user_id, movie_id, quantity, type, proof, total_price, seats)
 VALUES (1, 1, 2, 'inteira', 'comprovante1.png', 40.00, 'A1,A2');
 

@@ -1,5 +1,3 @@
-# routes.py
-
 import json
 import os
 from controllers.auth import login, register, reset_password, verify_user

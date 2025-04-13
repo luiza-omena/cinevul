@@ -1,4 +1,3 @@
--- Inserindo usuários admin
 INSERT INTO users (username, password, full_name, birth_date, is_admin, email, phone, favorite_color, birth_year, first_school) VALUES
 ('admin', 'Ax9@vPlr', 'Admin Master', '1985-01-01', true, 'admin@example.com', '11999990000', 'preto', '1985', 'Escola 1'),
 ('j.silva', 'F3n!Qu2s', 'João Silva', '1990-02-15', true, 'jsilva@example.com', '11988880000', 'azul', '1990', 'Escola 2'),

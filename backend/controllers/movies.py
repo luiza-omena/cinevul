@@ -39,7 +39,6 @@ def create_movie(data):
         conn.commit()
         return {"success": True}
     except Exception as e:
-        print("❌ Erro ao criar filme:", e)
         return {"success": False, "error": str(e)}
     finally:
         cur.close()
@@ -70,7 +69,6 @@ def update_movie(data):
             return {"success": False, "error": "Filme não encontrado"}
         return {"success": True}
     except Exception as e:
-        print("❌ Erro ao atualizar filme:", e)
         return {"success": False, "error": str(e)}
     finally:
         cur.close()
@@ -86,7 +84,6 @@ def delete_movie(movie_id):
             return {"success": False, "error": "Filme não encontrado"}
         return {"success": True}
     except Exception as e:
-        print("❌ Erro ao deletar filme:", e)
         return {"success": False, "error": str(e)}
     finally:
         cur.close()

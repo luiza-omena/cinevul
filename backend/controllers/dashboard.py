@@ -33,7 +33,6 @@ def delete_user(target_user_id):
         conn.commit()
         success = True
     except Exception as e:
-        print("Erro ao excluir usuário:", e)
         success = False
     cur.close()
     conn.close()

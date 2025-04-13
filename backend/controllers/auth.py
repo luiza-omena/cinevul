@@ -58,7 +58,6 @@ def is_strong_password(password):
     return True
 
 def login(data, token):
-    print("🎯 Verificando usuário no banco...", flush=True)
     conn = get_connection()
     cur = conn.cursor()
 
@@ -73,10 +72,8 @@ def login(data, token):
 
     if user:
         user_id = user[0]
-        print(f"✅ Login bem-sucedido! user_id: {user_id}", flush=True)
         set_session(token, user_id)
         return {"success": True}
-    print("❌ Login falhou: credenciais inválidas", flush=True)
     return {"success": False}
 
 
@@ -116,7 +113,6 @@ def register(data):
 
     except Exception as e:
         conn.rollback()
-        print(f"Erro inesperado: {e}")
         return {"success": False, "error": "Erro ao registrar usuário."}
 
     finally:

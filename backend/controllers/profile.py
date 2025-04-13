@@ -59,7 +59,6 @@ def update_username_raw(user_id, new_username):
         conn.close()
         return {"success": True}
     except Exception as e:
-        print("Erro ao editar nome de usuário:", e)
         return {"success": False, "error": str(e)}
     
 def update_profile_field(user_id, field, value):
@@ -75,5 +74,4 @@ def update_profile_field(user_id, field, value):
         conn.close()
         return {"success": True}
     except Exception as e:
-        print(f"Erro ao editar {field}:", e)
         return {"success": False, "error": str(e)}
