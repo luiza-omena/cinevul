@@ -1,109 +1,102 @@
-# CineViewExperience (CVE)
+# 🎬 CineViewExperience (CVE)
 
-A **CineViewExperience** (ou CVE) é uma plataforma web para compra de ingressos de cinema, com interface simples e intuitiva, ideal para testes de segurança e aprendizado em desenvolvimento web fullstack. O sistema permite login de usuários, visualização de filmes em cartaz, realização de pedidos e uma área administrativa com informações de dashboard.
+**CineViewExperience** is an interactive web platform that simulates movie ticket purchases. Developed with an educational focus, the application allows users to explore fullstack development concepts and test security vulnerabilities in a controlled environment. With a complete system featuring user login, orders, and an administrative dashboard, CVE is ideal for hands-on learning in information security and best web development practices.
 
-## Tecnologias Utilizadas
+---
 
-### Frontend
+## 🚀 Technologies Used
 
-- **HTML**: Estrutura das telas de login, listagem de filmes e dashboard.
-- **CSS**: Estilização visual simples e responsiva.
-- **JavaScript**: Requisições assíncronas para comunicação com o backend (fetch).
+### 🔹 Frontend
 
-<p>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" alt="HTML" width="64" height="64">
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" alt="CSS" width="64" height="64">
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="JavaScript" width="64" height="64">
-</p>
-
-### Backend
-
-- **Python**: Linguagem principal para a lógica do backend.
-- **http.server**: Servidor web leve para APIs RESTful.
-- **psycopg2**: Conexão com banco de dados PostgreSQL.
-- **dotenv**: Carregamento de variáveis de ambiente.
+- **HTML**: Structure of the platform's pages.
+- **CSS**: Responsive design with mobile-friendly adaptation.
+- **JavaScript**: Dynamic interactions and asynchronous communication with the backend.
 
 <p>
-  <a href="https://www.python.org/">
-    <img src="https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png" alt="Python" width="64" height="64">
-  </a>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" width="64" height="64">
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" alt="Docker" width="64" height="64">
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" alt="HTML" width="48" height="48">
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" alt="CSS" width="48" height="48">
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="JavaScript" width="48" height="48">
 </p>
 
-## Configuração do Projeto
+### 🔸 Backend
 
-### Docker
+- **Python**: Primary language for business logic and routing.
+- **http.server**: Lightweight built-in HTTP server.
+- **psycopg2**: PostgreSQL connector.
+- **dotenv**: Reads sensitive environment variables.
 
-O backend e o banco de dados rodam totalmente em containers Docker. Basta ter o **Docker Desktop** instalado.
+<p>
+  <img src="https://www.python.org/static/community_logos/python-logo.png" alt="Python" width="100">
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" width="48" height="48">
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" alt="Docker" width="48" height="48">
+</p>
 
-1. Clone o repositório:
+---
+
+## ⚙️ Project Setup
+
+### 🐳 With Docker (Recommended)
+
+1. Clone the repository:
 
    ```bash
-   git clone https://github.com/seu-usuario/cineviewexperience.git
+   git clone https://github.com/your-username/cineviewexperience.git
    cd cineviewexperience
    ```
 
-2. Suba o ambiente com:
+2. Start the environment:
 
    ```bash
    docker compose up --build
    ```
 
-3. O backend ficará acessível em:
+3. Access the services:
 
-   ```
-   http://localhost:8000
-   ```
+   - Backend: `http://localhost:8000`
+   - Frontend: `http://localhost:5500`
 
-> O banco de dados é iniciado automaticamente com o script `init.sql` que cria as tabelas `users`, `movies` e `orders`.
+> The database is automatically created with the tables `users`, `movies`, and `orders` via the `init.sql` script.
 
 ---
 
-### Frontend (HTML/CSS/JS)
+### 💻 Run Frontend Locally
 
-O frontend é estático e pode ser aberto diretamente no navegador ou servido localmente.
-
-1. Navegue até a pasta:
+1. Navigate to the frontend folder:
 
    ```bash
    cd frontend
    ```
 
-2. Rode um servidor local (opcional):
+2. Start a local server:
 
    ```bash
    python3 -m http.server 5500
    ```
 
-3. Acesse:
+3. Open in your browser:
 
    ```
-   http://localhost:5500/login.html
+   http://localhost:5500
    ```
-
-> O frontend faz chamadas para `http://localhost:8000` via `fetch()`
 
 ---
 
-### Backend (Python puro)
+### 🐍 Run Backend Locally
 
-O backend está localizado em `/backend`. Se quiser rodar fora do Docker:
-
-1. Instale as dependências:
+1. Install the dependencies:
 
    ```bash
    pip install -r backend/requirements.txt
    ```
 
-2. Inicie o servidor:
+2. Start the server:
 
    ```bash
    cd backend
    python server.py
    ```
 
-3. O servidor rodará em:
+3. Access it at:
 
    ```
    http://localhost:8000
@@ -111,24 +104,106 @@ O backend está localizado em `/backend`. Se quiser rodar fora do Docker:
 
 ---
 
-### Banco de Dados (PostgreSQL via Docker)
+### 🗃️ Database
 
-O banco é iniciado via container e configurado pelo Docker Compose:
+- Port: `5432`
+- Database: `cinema`
+- User: `postgres`
+- Password: `senha123`
 
-- Porta: `5432`
-- Banco: `cinema`
-- Usuário: `postgres`
-- Senha: `senha123`
-
-As credenciais estão definidas no `docker-compose.yml` e podem ser personalizadas conforme necessário.
+The credentials are defined in `docker-compose.yml`.
 
 ---
 
-## Funcionalidades
+## 🎯 Features
 
-- Login de usuário
-- Listagem de filmes
-- Realização de pedidos de ingresso
-- Dashboard administrativo com estatísticas
+### 👤 User
+
+- Registration with security questions
+- Login with token-based authentication (with intentionally introduced flaws)
+- Listing of movies currently showing
+- Ticket purchase (full or half-price)
+- Receipt upload for half-price (with reflected XSS vulnerability)
+- Order history with filtering and pagination
+- Password recovery via security questions
 
 ---
+
+### 🛠️ Admin
+
+- Dashboard with charts and statistics
+- User listing with deletion option
+- Full-detail view of all orders
+- Access restricted to users with admin privileges
+
+---
+
+### 🔐 Intentional Security Vulnerabilities for Testing
+
+- Session Fixation (session token generated before login)
+- CSRF in the profile form
+- Reflected XSS in the half-price receipt (displayed in admin view)
+- SQL Injection in the profile name field
+- Cookies without proper SameSite configuration
+- Lack of authentication in sensitive endpoints
+- Privilege escalation (users can delete other users)
+- Brute force on login (no attempt limits)
+- Debug page exposed (`?debug=/devtools`)
+- Credential dump file exposed (`/bacakdumpin.html`)
+- Passwords stored in plaintext
+- Insecure security questions authentication
+
+---
+
+## 📊 Dashboard
+
+The `dashboard.html` page displays:
+
+- Charts for tickets sold, total revenue, and ticket types
+- Link to the user list (with deletion button)
+- Link to orders (`orders.html`)
+- Only visible to authenticated admins
+
+---
+
+## 📁 Directory Structure
+
+```
+cineviewexperience/
+├── backend/
+│   ├── server.py
+│   ├── controllers/
+│   ├── database/
+│   └── requirements.txt
+├── frontend/
+│   ├── login.html
+│   ├── dashboard.html
+│   ├── orders.html
+│   ├── index.html
+│   ├── about.html
+│   ├── dashboard-movies.html
+│   ├── movies.html
+│   ├── users.html
+│   ├── recover.html
+│   ├── register.html
+│   ├── profile.html
+│   ├── js/
+│   └── css/
+├── docker-compose.yml
+├── Dockerfile
+└── scripts.sql/
+```
+
+---
+
+## 🎓 Educational Purpose
+
+This platform was created for study, testing, and learning purposes:
+
+- Simulation of common security vulnerabilities
+- Analysis of insecure web practices
+- Practical application of penetration testing techniques
+- Teaching concepts of authentication, validation, and data protection
+
+> ⚠️ **Attention:** Do not use this system in production environments. The vulnerabilities are intentional, and security has been purposely compromised.
+
