@@ -31,9 +31,15 @@ recoverForm.addEventListener("submit", async (e) => {
     newPasswordForm.classList.remove("hidden");
     msg.textContent = "";
   } else {
-    msg.textContent = "Informações incorretas!";
+    if (result.error === "user_not_found") {
+      msg.textContent = "Usuário não encontrado.";
+    } else if (result.error === "invalid_answers") {
+      msg.textContent = "Informações incorretas!";
+    } else {
+      msg.textContent = "Erro desconhecido.";
+    }
     msg.className = "error-msg";
-  }
+  }  
 });
 
 newPasswordForm.addEventListener("submit", async (e) => {

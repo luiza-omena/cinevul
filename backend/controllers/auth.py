@@ -8,19 +8,25 @@ def verify_user(data):
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("""
-        SELECT id FROM users WHERE username = %s
-        AND favorite_color = %s AND birth_year = %s AND first_school = %s
-    """, (
-        data["username"], data["favorite_color"],
-        data["birth_year"], data["first_school"]
-    ))
-
+    cur.execute("SELECT id, favorite_color, birth_year, first_school FROM users WHERE username = %s", (data["username"],))
     user = cur.fetchone()
-    cur.close()
-    conn.close()
 
-    return {"success": bool(user)}
+    if not user:
+        cur.close()
+        conn.close()
+        return {"success": False, "error": "user_not_found"}
+
+    if (user[1] == data["favorite_color"] and
+        user[2] == data["birth_year"] and
+        user[3] == data["first_school"]):
+        cur.close()
+        conn.close()
+        return {"success": True}
+    else:
+        cur.close()
+        conn.close()
+        return {"success": False, "error": "invalid_answers"}
+
 
 def reset_password(data):
     if not is_strong_password(data["password"]):
