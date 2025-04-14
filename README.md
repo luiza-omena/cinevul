@@ -123,7 +123,6 @@ The credentials are defined in `docker-compose.yml`.
 - Login with token-based authentication (with intentionally introduced flaws)
 - Listing of movies currently showing
 - Ticket purchase (full or half-price)
-- Receipt upload for half-price (with reflected XSS vulnerability)
 - Order history with filtering and pagination
 - Password recovery via security questions
 
@@ -135,23 +134,6 @@ The credentials are defined in `docker-compose.yml`.
 - User listing with deletion option
 - Full-detail view of all orders
 - Access restricted to users with admin privileges
-
----
-
-### 🔐 Intentional Security Vulnerabilities for Testing
-
-- Session Fixation (session token generated before login)
-- CSRF in the profile form
-- Reflected XSS in the half-price receipt (displayed in admin view)
-- SQL Injection in the profile name field
-- Cookies without proper SameSite configuration
-- Lack of authentication in sensitive endpoints
-- Privilege escalation (users can delete other users)
-- Brute force on login (no attempt limits)
-- Debug page exposed (`?debug=/devtools`)
-- Credential dump file exposed (`/bacakdumpin.html`)
-- Passwords stored in plaintext
-- Insecure security questions authentication
 
 ---
 
