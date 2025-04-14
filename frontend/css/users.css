@@ -17,6 +17,11 @@
     flex-wrap: wrap;
   }
 
+  .user-card img {
+    width: 18px;
+    height: 18px;
+  }
+  
   .user-card .user-info p {
     margin: 0.2rem 0;
     color: #ccc;
@@ -31,35 +36,33 @@
   }
 
   .delete-btn {
-    background-color: #e50914;
+    background: rgba(0, 0, 0, 0.6);
     border: none;
-    padding: 0.5rem 1rem;
-    color: white;
     cursor: pointer;
+    padding: 0.3rem;
     border-radius: 4px;
-    font-weight: bold;
   }
   
   .delete-btn:hover {
     background-color: #bf0810;
   }
 
-.users-filters {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  gap: 1rem;
-  margin: 1.5rem auto;
-}
+  .users-filters {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1rem;
+    margin: 1.5rem auto;
+  }
 
-.users-filters .search-filters {
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-}
+  .users-filters .search-filters {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
 
-.users-filters select {
-  width: 70%;
-  max-width: 220px;
-  margin: 0 auto;
-}
+  .users-filters select {
+    width: 70%;
+    max-width: 220px;
+    margin: 0 auto;
+  }

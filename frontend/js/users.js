@@ -162,7 +162,9 @@ function renderUsers() {
           <p>Email: ${u.email}</p>
           <p>Celular: ${phoneDisplay}</p>
         </div>
-        <button onclick="deleteUser(${u.id})" class="delete-btn">Excluir</button>
+        <button class="delete-btn" onclick="deleteUser(${u.id})">
+          <img src="assets/icons/Trash.svg" alt="Excluir">
+        </button>
       </div>
     `;
   }).join("");
