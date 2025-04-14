@@ -134,7 +134,9 @@ function renderPage() {
         <img src="assets/icons/Burger.svg" alt="Menu" class="burger-icon">
       </button>
       <div class="dropdown hidden" id="userMenu">
+        <a href="dashboard.html">Dashboard</a>
         <a href="index.html">Início</a>
+        <a href="profile.html">Perfil</a>
         <a href="movies.html">Filmes</a>
         <a href="users.html">Usuários</a>
         <a href="dashboard-movies.html">Gerenciar Filmes</a>
