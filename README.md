@@ -115,39 +115,6 @@ The credentials are defined in `docker-compose.yml`.
 
 ---
 
-## 🎯 Features
-
-### 👤 User
-
-- Registration with security questions
-- Login with token-based authentication (with intentionally introduced flaws)
-- Listing of movies currently showing
-- Ticket purchase (full or half-price)
-- Order history with filtering and pagination
-- Password recovery via security questions
-
----
-
-### 🛠️ Admin
-
-- Dashboard with charts and statistics
-- User listing with deletion option
-- Full-detail view of all orders
-- Access restricted to users with admin privileges
-
----
-
-## 📊 Dashboard
-
-The `dashboard.html` page displays:
-
-- Charts for tickets sold, total revenue, and ticket types
-- Link to the user list (with deletion button)
-- Link to orders (`orders.html`)
-- Only visible to authenticated admins
-
----
-
 ## 📁 Directory Structure
 
 ```
