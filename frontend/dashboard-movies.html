@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Filmes - Admin | CineViewExperience</title>
+  <title>Movies - Admin | CineViewExperience</title>
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/adminMovies.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -14,19 +14,19 @@
     </button>
     <div class="dropdown hidden" id="userMenu">
       <a href="dashboard.html">Dashboard</a>
-      <a href="index.html">Início</a>
-      <a href="profile.html">Perfil</a>
-      <a href="movies.html">Filmes</a>
-      <a href="users.html">Usuários</a>
-      <a href="orders.html">Pedidos</a>
-      <button onclick="logout()">Sair</button>
+      <a href="index.html">Home</a>
+      <a href="profile.html">Profile</a>
+      <a href="movies.html">Movies</a>
+      <a href="users.html">Users</a>
+      <a href="orders.html">Orders</a>
+      <button onclick="logout()">Log out</button>
     </div>
   </div>
 
   <div class="container">
-    <h1>Gerenciar Filmes</h1>
+    <h1>Manage Movies</h1>
     <button id="createMovieBtn" class="create-btn">
-      <img src="assets/icons/Plus.svg" alt="Adicionar Filme">
+      <img src="assets/icons/Plus.svg" alt="Add Movie">
     </button>
     <div id="moviesList" class="movies-list"></div>
   </div>
@@ -34,20 +34,20 @@
   <div id="movieModal" class="modal hidden">
     <div class="modal-content">
       <span class="close" onclick="closeMovieModal()">&times;</span>
-      <h2 id="movieModalTitle">Novo Filme</h2>
+      <h2 id="movieModalTitle">New Movie</h2>
       <form id="movieForm" onsubmit="submitMovieForm(event)">
         <input type="hidden" id="movieId">
-        <label for="title">Título:</label>
+        <label for="title">Title:</label>
         <input type="text" id="title" required>
-        <label for="description">Descrição:</label>
+        <label for="description">Description:</label>
         <textarea id="description" required></textarea>
-        <label for="release_date">Data de Lançamento:</label>
+        <label for="release_date">Release Date:</label>
         <input type="date" id="release_date" required>
-        <label for="image_url">URL da Imagem:</label>
+        <label for="image_url">Image URL:</label>
         <input type="url" id="image_url" required>
-        <label for="price">Preço:</label>
+        <label for="price">Price:</label>
         <input type="number" id="price" step="0.01" required>
-        <button type="submit">Salvar</button>
+        <button type="submit">Save</button>
       </form>
     </div>
   </div>
@@ -55,11 +55,11 @@
   <div id="confirmModal" class="modal hidden">
     <div class="modal-content">
       <span class="close" onclick="closeConfirmModal()">&times;</span>
-      <h3>Confirmar Exclusão</h3>
-      <p>Tem certeza que deseja excluir este filme?</p>
+      <h3>Confirm Deletion</h3>
+      <p>Are you sure you want to delete this movie?</p>
       <div class="modal-actions">
-        <button id="confirmDeleteBtn">Excluir</button>
-        <button onclick="closeConfirmModal()">Cancelar</button>
+        <button id="confirmDeleteBtn">Delete</button>
+        <button onclick="closeConfirmModal()">Cancel</button>
       </div>
     </div>
   </div>
@@ -67,7 +67,7 @@
   <div id="successModal" class="modal hidden">
     <div class="modal-content">
       <span class="close" onclick="closeSuccessModal()">&times;</span>
-      <h3>Sucesso</h3>
+      <h3>Success</h3>
       <p id="successMessage"></p>
       <div class="modal-actions">
         <button onclick="closeSuccessModal()">OK</button>

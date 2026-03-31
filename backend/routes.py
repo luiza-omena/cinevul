@@ -33,7 +33,7 @@ def handle_get(handler):
 
     if handler.path.startswith("/movies"):
         if not is_authenticated(token):
-            response = {"error": "Usuário não autenticado"}
+            response = {"error": "User not authenticated"}
             code = 401
         else:
             response = get_movies()
@@ -41,7 +41,7 @@ def handle_get(handler):
     elif handler.path.startswith("/admin/movies"):
         user_id = get_user_from_token(token)
         if not is_authenticated(token) or not is_admin(user_id):
-            response = {"error": "Acesso negado"}
+            response = {"error": "Access denied"}
             code = 403
         else:
             response = get_movies()
@@ -49,10 +49,10 @@ def handle_get(handler):
 
     elif handler.path.startswith("/dashboard"):
         if not is_authenticated(token):
-            response = {"error": "Usuário não autenticado"}
+            response = {"error": "User not authenticated"}
             code = 401
         else:
-            response = {"error": "Dashboard indisponível"}
+            response = {"error": "Dashboard unavailable"}
             code = 200
 
     elif handler.path.startswith("/admin/orders"):
@@ -63,7 +63,7 @@ def handle_get(handler):
 
     elif handler.path.startswith("/profile"):
         if not is_authenticated(token):
-            response = {"error": "Usuário não autenticado"}
+            response = {"error": "User not authenticated"}
             code = 401
         else:
             user_id = get_user_from_token(token)
@@ -169,7 +169,7 @@ def handle_post(handler):
     elif handler.path.startswith("/admin/movies/create"):
         user_id = get_user_from_token(token)
         if not is_authenticated(token) or not is_admin(user_id):
-            response = {"error": "Acesso negado"}
+            response = {"error": "Access denied"}
             handler.send_response(403)
         else:
             response = create_movie(post_data)
@@ -178,7 +178,7 @@ def handle_post(handler):
     elif handler.path.startswith("/admin/movies/edit"):
         user_id = get_user_from_token(token)
         if not is_authenticated(token) or not is_admin(user_id):
-            response = {"error": "Acesso negado"}
+            response = {"error": "Access denied"}
             handler.send_response(403)
         else:
             response = update_movie(post_data)
@@ -187,7 +187,7 @@ def handle_post(handler):
     elif handler.path.startswith("/admin/movies/delete"):
         user_id = get_user_from_token(token)
         if not is_authenticated(token) or not is_admin(user_id):
-            response = {"error": "Acesso negado"}
+            response = {"error": "Access denied"}
             handler.send_response(403)
         else:
             movie_id = post_data.get("id")

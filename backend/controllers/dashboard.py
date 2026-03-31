@@ -12,7 +12,7 @@ def is_admin(user_id):
 
 def get_all_users(requester_id):
     if not is_admin(requester_id):
-        return {"error": "Acesso não autorizado"}
+        return {"error": "Unauthorized access"}
 
     conn = get_connection()
     cur = conn.cursor()
@@ -40,7 +40,7 @@ def delete_user(target_user_id):
 
 def get_admin_stats(requester_id):
     if not is_admin(requester_id):
-        return {"error": "Acesso não autorizado"}
+        return {"error": "Unauthorized access"}
     
     conn = get_connection()
     cur = conn.cursor()

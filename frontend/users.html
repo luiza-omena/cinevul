@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Usuários - Dashboard CineView</title>
+  <title>Users - CineView Dashboard</title>
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" href="css/users.css">
@@ -14,27 +14,27 @@
       <img src="assets/icons/Burger.svg" alt="Menu" class="burger-icon">
     </button>
     <div class="dropdown hidden" id="userMenu">
-      <a href="index.html">Início</a>
-      <a href="movies.html">Filmes</a>
-      <a href="profile.html">Perfil</a>
-      <a href="orders.html">Pedidos</a>
-      <a href="dashboard-movies.html">Gerenciar Filmes</a>
-      <button onclick="logout()">Sair</button>
+      <a href="index.html">Home</a>
+      <a href="movies.html">Movies</a>
+      <a href="profile.html">Profile</a>
+      <a href="orders.html">Orders</a>
+      <a href="dashboard-movies.html">Manage Movies</a>
+      <button onclick="logout()">Log out</button>
     </div>
   </div>
 
   <div class="container">
-    <h1>Usuários</h1>
+    <h1>Users</h1>
 
     <div class="filters users-filters auth-only">
       <div class="search-filters">
-        <input type="text" id="searchInput" placeholder="Buscar por nome, usuário, email ou celular...">
+        <input type="text" id="searchInput" placeholder="Search by name, username, email, or phone...">
         <button id="applyFilter" class="filter-btn">➤</button>
       </div>
       <select id="typeFilter">
-        <option value="">Todos</option>
+        <option value="">All</option>
         <option value="admin">Admin</option>
-        <option value="naoadmin">Não Admin</option>
+        <option value="naoadmin">Non-admin</option>
       </select>
     </div>
     
@@ -47,10 +47,10 @@
       <div id="paginationNumbers" class="pagination-numbers"></div>
       <button id="nextPage">⟩</button>
       <select id="perPageSelect" class="per-page-select">
-        <option value="5">5 por página</option>
-        <option value="10" selected>10 por página</option>
-        <option value="20">20 por página</option>
-        <option value="50">50 por página</option>
+        <option value="5">5 per page</option>
+        <option value="10" selected>10 per page</option>
+        <option value="20">20 per page</option>
+        <option value="50">50 per page</option>
       </select>
     </div>
   </div>
@@ -58,11 +58,11 @@
   <div id="deleteModal" class="modal hidden">
     <div class="modal-content">
       <span class="close" onclick="closeDeleteModal()">&times;</span>
-      <h3>Confirmar Exclusão</h3>
-      <p>Tem certeza que deseja excluir este usuário?</p>
+      <h3>Confirm Deletion</h3>
+      <p>Are you sure you want to delete this user?</p>
       <div class="modal-actions">
-        <button id="confirmDelete">Excluir</button>
-        <button id="cancelDelete">Cancelar</button>
+        <button id="confirmDelete">Delete</button>
+        <button id="cancelDelete">Cancel</button>
       </div>
     </div>
   </div>

@@ -24,9 +24,9 @@ async function loadAdminMovies() {
       errorDiv.innerHTML = `
         <div class="center-message">
           <div class="unauth-container">
-            <h2>Acesso não autorizado</h2>
-            <p>Esta página é restrita a administradores.</p>
-            <a class="login-btn" href="login.html">Fazer login</a>
+            <h2>Unauthorized access</h2>
+            <p>This page is restricted to administrators.</p>
+            <a class="login-btn" href="login.html">Sign in</a>
           </div>
         </div>
       `;
@@ -46,8 +46,8 @@ async function loadAdminMovies() {
     errorDiv.innerHTML = `
       <div class="center-message">
         <div class="unauth-container">
-          <h2>Erro ao carregar filmes</h2>
-          <p>Tente novamente mais tarde.</p>
+          <h2>Error loading movies</h2>
+          <p>Please try again later.</p>
         </div>
       </div>
     `;
@@ -66,10 +66,10 @@ function renderMovies() {
       </div>
       <div class="movie-actions">
         <button class="edit-btn" onclick="openMovieModal(${movie.id})">
-          <img src="assets/icons/Edit.svg" alt="Editar">
+          <img src="assets/icons/Edit.svg" alt="Edit">
         </button>
         <button class="delete-btn" onclick="openConfirmModal(${movie.id})">
-          <img src="assets/icons/Trash.svg" alt="Excluir">
+          <img src="assets/icons/Trash.svg" alt="Delete">
         </button>
       </div>
     </div>
@@ -83,7 +83,7 @@ function openMovieModal(movieId) {
   if (movieId) {
     const movie = movies.find(m => m.id === movieId);
     if (!movie) return;
-    modalTitle.textContent = "Editar Filme";
+    modalTitle.textContent = "Edit Movie";
     document.getElementById("movieId").value = movie.id;
     document.getElementById("title").value = movie.title;
     document.getElementById("description").value = movie.description;
@@ -91,7 +91,7 @@ function openMovieModal(movieId) {
     document.getElementById("image_url").value = movie.image_url;
     document.getElementById("price").value = movie.price;
   } else {
-    modalTitle.textContent = "Novo Filme";
+    modalTitle.textContent = "New Movie";
     form.reset();
     document.getElementById("movieId").value = "";
   }
@@ -127,15 +127,15 @@ async function submitMovieForm(e) {
     const data = await res.json();
     if (data.success) {
       closeMovieModal();
-      openSuccessModal("Filme salvo com sucesso!");
+      openSuccessModal("Movie saved successfully!");
       await loadAdminMovies();
     } else {
       const container = document.querySelector(".container");
       container.innerHTML = `
         <div class="center-message">
           <div class="unauth-container">
-            <h2>Erro ao salvar filme</h2>
-            <p>Não foi possível salvar o filme. Tente novamente.</p>
+            <h2>Error saving movie</h2>
+            <p>Could not save the movie. Please try again.</p>
           </div>
         </div>
       `;
@@ -145,8 +145,8 @@ async function submitMovieForm(e) {
     container.innerHTML = `
       <div class="center-message">
         <div class="unauth-container">
-          <h2>Erro ao salvar filme</h2>
-          <p>Não foi possível salvar o filme. Tente novamente.</p>
+          <h2>Error saving movie</h2>
+          <p>Could not save the movie. Please try again.</p>
         </div>
       </div>
     `;
@@ -175,15 +175,15 @@ async function deleteMovieConfirmed() {
     const data = await res.json();
     if (data.success) {
       closeConfirmModal();
-      openSuccessModal("Filme excluído com sucesso!");
+      openSuccessModal("Movie deleted successfully!");
       await loadAdminMovies();
     } else {
       const container = document.querySelector(".container");
       container.innerHTML = `
         <div class="center-message">
           <div class="unauth-container">
-            <h2>Erro ao excluir filme</h2>
-            <p>Não foi possível excluir o filme. Tente novamente.</p>
+            <h2>Error deleting movie</h2>
+            <p>Could not delete the movie. Please try again.</p>
           </div>
         </div>
       `;
@@ -194,8 +194,8 @@ async function deleteMovieConfirmed() {
     container.innerHTML = `
       <div class="center-message">
         <div class="unauth-container">
-          <h2>Erro ao excluir filme</h2>
-          <p>Não foi possível excluir o filme. Tente novamente.</p>
+          <h2>Error deleting movie</h2>
+          <p>Could not delete the movie. Please try again.</p>
         </div>
       </div>
     `;
@@ -205,7 +205,7 @@ async function deleteMovieConfirmed() {
 
 function openSuccessModal(message) {
   const successModal = document.getElementById("successModal");
-  document.getElementById("successMessage").textContent = message || "Operação realizada com sucesso.";
+  document.getElementById("successMessage").textContent = message || "Operation completed successfully.";
   successModal.classList.remove("hidden");
 }
 

@@ -16,20 +16,20 @@ async function registerUser(e) {
   today.setHours(0, 0, 0, 0);
 
   if (birthDateValue >= today) {
-    msg.textContent = "Data de nascimento inválida.";
+    msg.textContent = "Invalid birth date.";
     msg.className = "error-msg";
     return;
   }
 
-  const senha = password;
+  const userPassword = password;
 
-  const hasUpperCase = /[A-Z]/.test(senha);
-  const hasSpecialChar = /[\W_]/.test(senha);
-  const isLongEnough = senha.length >= 8;
-  const hasForbiddenSequence = /(123|111|222|333|444|555|666|777|888|999)/.test(senha);
+  const hasUpperCase = /[A-Z]/.test(userPassword);
+  const hasSpecialChar = /[\W_]/.test(userPassword);
+  const isLongEnough = userPassword.length >= 8;
+  const hasForbiddenSequence = /(123|111|222|333|444|555|666|777|888|999)/.test(userPassword);
 
   if (!hasUpperCase || !hasSpecialChar || !isLongEnough || hasForbiddenSequence) {
-    msg.textContent = "Senha fraca. Use ao menos 8 caracteres, uma letra maiúscula e um símbolo. Evite sequências e números iguais.";
+    msg.textContent = "Weak password. Use at least 8 characters, one uppercase letter, and one symbol. Avoid sequences and repeated numbers.";
     msg.className = "error-msg";
     return;
   }
@@ -46,11 +46,11 @@ async function registerUser(e) {
   const data = await res.json();
 
   if (data.success) {
-    msg.textContent = "Cadastro realizado com sucesso!";
+    msg.textContent = "Registration completed successfully!";
     msg.className = "success-msg";
     setTimeout(() => window.location.href = "login.html", 300);
   } else {
-    msg.textContent = data.error || "Erro ao cadastrar. Verifique os dados.";
+    msg.textContent = data.error || "Registration failed. Please check the provided data.";
     msg.className = "error-msg";
   }  
 }

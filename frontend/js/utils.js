@@ -61,7 +61,7 @@ async function isUserAdmin() {
     const data = await res.json();
     return data["is_admin"];
   } catch (err) {
-    console.error("Erro ao verificar se o usuário é admin:", err);
+    console.error("Error checking whether the user is admin:", err);
     return false;
   }
 }
@@ -88,7 +88,7 @@ async function isUserLoggedIn() {
     const data = await res.json();
     return data.isAuthenticated;
   } catch (err) {
-    console.error("Erro ao verificar autenticação:", err);
+    console.error("Error checking authentication:", err);
     return false;
   }
 }
@@ -107,7 +107,7 @@ if (url.searchParams.get("debug") === "devtools") {
         "</pre>";
     })
     .catch(err => {
-      document.body.innerHTML = "<h2 style='color:red'>Erro ao carregar devtools</h2>";
+      document.body.innerHTML = "<h2 style='color:red'>Error loading devtools</h2>";
       console.error(err);
     });
 }

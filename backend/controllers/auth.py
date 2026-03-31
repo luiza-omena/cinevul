@@ -89,7 +89,7 @@ def register(data):
 
     try:
         if not is_strong_password(data["password"]):
-            return {"success": False, "error": "Senha não atende aos requisitos de segurança."}
+            return {"success": False, "error": "Password does not meet security requirements."}
         cur.execute(
             """
             INSERT INTO users (
@@ -112,14 +112,14 @@ def register(data):
     except psycopg2.errors.UniqueViolation as e:
         conn.rollback()
         if 'users_username_key' in str(e):
-            return {"success": False, "error": "Nome de usuário já existe."}
+            return {"success": False, "error": "Username already exists."}
         elif 'users_email_key' in str(e):
-            return {"success": False, "error": "E-mail já está em uso."}
-        return {"success": False, "error": "Erro de duplicidade."}
+            return {"success": False, "error": "Email is already in use."}
+        return {"success": False, "error": "Duplicate value error."}
 
     except Exception as e:
         conn.rollback()
-        return {"success": False, "error": "Erro ao registrar usuário."}
+        return {"success": False, "error": "Error registering user."}
 
     finally:
         cur.close()
