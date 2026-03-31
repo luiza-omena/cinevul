@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Perfil - CineViewExperience</title>
+  <title>Profile - CineViewExperience</title>
   <link rel="stylesheet" href="css/profile.css">
   <link rel="stylesheet" href="css/global.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -13,45 +13,45 @@
       <img src="assets/icons/Burger.svg" alt="Menu" class="burger-icon">
     </button>
     <div class="dropdown hidden" id="userMenu">
-      <a href="index.html">Início</a>
-      <a href="movies.html">Filmes</a>
-      <button onclick="logout()">Sair</button>
+      <a href="index.html">Home</a>
+      <a href="movies.html">Movies</a>
+      <button onclick="logout()">Log out</button>
     </div>
   </div>  
 
   <div class="container">
-    <h1 class="auth-only">Meu Perfil</h1>
+    <h1 class="auth-only">My Profile</h1>
     
     <div id="userInfo" class="user-card auth-only"></div>
 
     <div id="editProfileModal" class="modal hidden">
       <div class="modal-content">
         <span class="close" onclick="closeEditModal()">&times;</span>
-        <h3 id="editModalTitle">Editar</h3>
+        <h3 id="editModalTitle">Edit</h3>
         <form id="editProfileForm">
           <input type="text" id="editFieldValue" placeholder="" required />
           <input type="hidden" id="editFieldType" />
           <input type="hidden" id="editUserId" />
-          <button type="button" onclick="submitEdit()">Salvar</button>
+          <button type="button" onclick="submitEdit()">Save</button>
         </form>
       </div>
     </div>
     
     <div class="filters auth-only">
       <div class="search-filters">
-        <input type="text" id="searchInput" placeholder="Buscar por filme, tipo ou cadeiras...">
+        <input type="text" id="searchInput" placeholder="Search by movie, type, or seats...">
         <button id="applyFilter" class="filter-btn">➤</button>
       </div>
       <select id="typeFilter">
-        <option value="">Todos os tipos</option>
-        <option value="inteira">Inteira</option>
-        <option value="meia">Meia</option>
+        <option value="">All types</option>
+        <option value="full">Full</option>
+        <option value="half">Half</option>
       </select>
     </div>
 
     <div id="activeFilters" class="active-filters auth-only"></div>
 
-    <h2 class="auth-only" style="margin-top: 2rem;">Meus Pedidos</h2>
+    <h2 class="auth-only" style="margin-top: 2rem;">My Orders</h2>
     
     <div id="userOrders" class="auth-only"></div>
 
@@ -60,10 +60,10 @@
       <div id="paginationNumbers" class="pagination-numbers"></div>
       <button id="nextPage">⟩</button>
       <select id="perPageSelect" class="per-page-select">
-        <option value="5">5 por página</option>
-        <option value="10" selected>10 por página</option>
-        <option value="20">20 por página</option>
-        <option value="50">50 por página</option>
+        <option value="5">5 per page</option>
+        <option value="10" selected>10 per page</option>
+        <option value="20">20 per page</option>
+        <option value="50">50 per page</option>
       </select>
     </div>
   </div>

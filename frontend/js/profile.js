@@ -2,6 +2,8 @@ let orders = [];
 let currentPage = 1;
 let ordersPerPage = 10;
 let activeFilters = {};
+const normalizeType = (type) => (type === "inteira" ? "full" : type === "meia" ? "half" : type);
+const typeLabel = (type) => (normalizeType(type) === "full" ? "Full" : normalizeType(type) === "half" ? "Half" : type);
 
 document.addEventListener("DOMContentLoaded", async () => {
   await loadUserProfile();
@@ -58,8 +60,8 @@ async function loadUserProfile() {
     container.innerHTML = `
       <div class="center-message">
         <div class="unauth-container">
-          <h2>Você não está logado</h2>
-          <p>Para visualizar seu perfil e pedidos, faça login na plataforma.</p>
+          <h2>You are not logged in</h2>
+          <p>To view your profile and orders, please sign in to the platform.</p>
           <a class="login-btn" href="login.html">Login</a>
         </div>
       </div>
@@ -78,11 +80,11 @@ async function loadUserProfile() {
   <div style="display: flex; justify-content: center; gap: 1rem; flex-direction: column; align-items: center; margin-top: 1rem;">
     
     <div style="display: flex; align-items: center; gap: 0.5rem;">
-      <strong>Usuário:</strong>
+      <strong>Username:</strong>
       <span>${user.username}</span>
       <button onclick="openEditModal('username', ${user.id}, '${user.username}')" 
         style="background: none; border: none; cursor: pointer; display: flex; align-items: center;">
-        <img src="assets/icons/edit.svg" alt="Editar" style="width: 1rem; height: 1rem;" />
+        <img src="assets/icons/edit.svg" alt="Edit" style="width: 1rem; height: 1rem;" />
       </button>
     </div>
 
@@ -96,11 +98,11 @@ async function loadUserProfile() {
     </div>
 
     <div style="display: flex; align-items: center; gap: 0.5rem;">
-      <strong>Celular:</strong>
+      <strong>Phone:</strong>
       <span>${user.phone || 'N/A'}</span>
       <button onclick="openEditModal('phone', ${user.id}, '${user.phone || ''}')" 
         style="background: none; border: none; cursor: pointer; display: flex; align-items: center;">
-        <img src="assets/icons/edit.svg" alt="Editar" style="width: 1rem; height: 1rem;" />
+        <img src="assets/icons/edit.svg" alt="Edit" style="width: 1rem; height: 1rem;" />
       </button>
     </div>
 
@@ -115,7 +117,7 @@ function renderActiveFilters() {
   const container = document.getElementById("activeFilters");
   container.innerHTML = Object.entries(activeFilters).map(([key, value]) => `
     <div class="filter-chip">
-      ${key === 'search' ? `Busca: "${value}"` : `Tipo: ${value}`}
+      ${key === 'search' ? `Search: "${value}"` : `Type: ${typeLabel(value)}`}
       <button onclick="removeFilter('${key}')">×</button>
     </div>
   `).join("");
@@ -144,7 +146,7 @@ function renderOrders() {
   }
 
   if (activeFilters.type) {
-    filtered = filtered.filter(o => o.type === activeFilters.type);
+    filtered = filtered.filter(o => normalizeType(o.type) === activeFilters.type);
   }
 
   const totalPages = Math.ceil(filtered.length / ordersPerPage);
@@ -156,12 +158,12 @@ function renderOrders() {
 
   userOrders.innerHTML = pageOrders.map(o => `
     <div class="order-card">
-      <h3>Pedido #${o.order_id} - ${o.movie_title}</h3>
-      <p><strong>Quantidade:</strong> ${o.quantity}</p>
-      <p><strong>Tipo:</strong> ${o.type}</p>
-      <p><strong>Cadeiras:</strong> ${o.seats}</p>
+      <h3>Order #${o.order_id} - ${o.movie_title}</h3>
+      <p><strong>Quantity:</strong> ${o.quantity}</p>
+      <p><strong>Type:</strong> ${typeLabel(o.type)}</p>
+      <p><strong>Seats:</strong> ${o.seats}</p>
       <p><strong>Total:</strong> R$ ${parseFloat(o.total_price).toFixed(2)}</p>
-      ${o.proof ? `<p><strong>Comprovante:</strong> ${o.proof}</p>` : ""}
+      ${o.proof ? `<p><strong>Proof:</strong> ${o.proof}</p>` : ""}
     </div>
   `).join("");
 
@@ -212,15 +214,15 @@ function goToPage(page) {
 
 function openEditModal(type, userId, currentValue) {
   const titleMap = {
-    username: "Editar Nome de Usuário",
-    email: "Editar E-mail",
-    phone: "Editar Celular"
+    username: "Edit Username",
+    email: "Edit Email",
+    phone: "Edit Phone"
   };
 
   const placeholderMap = {
-    username: "Novo nome de usuário",
-    email: "Novo e-mail",
-    phone: "Novo número de celular"
+    username: "New username",
+    email: "New email",
+    phone: "New phone number"
   };
 
   document.getElementById("editModalTitle").textContent = titleMap[type];
@@ -254,6 +256,6 @@ async function submitEdit() {
     closeEditModal();
     loadUserProfile();
   } else {
-    alert("Erro ao atualizar.");
+    alert("Error updating.");
   }
 }

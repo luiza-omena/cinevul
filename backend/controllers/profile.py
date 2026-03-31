@@ -1,5 +1,12 @@
 from database import get_connection
 
+def normalize_ticket_type(ticket_type):
+    if ticket_type == "inteira":
+        return "full"
+    if ticket_type == "meia":
+        return "half"
+    return ticket_type
+
 def get_profile_data(user_id):
     conn = get_connection()
     cur = conn.cursor()
@@ -34,7 +41,7 @@ def get_profile_data(user_id):
             "order_id": o[0],
             "movie_title": o[1],
             "quantity": o[2],
-            "type": o[3],
+            "type": normalize_ticket_type(o[3]),
             "total_price": float(o[4]),
             "seats": o[5]
         }
@@ -64,7 +71,7 @@ def update_username_raw(user_id, new_username):
 def update_profile_field(user_id, field, value):
     try:
         if field not in ["email", "phone"]:
-            return {"success": False, "error": "Campo inválido"}
+            return {"success": False, "error": "Invalid field"}
 
         conn = get_connection()
         cur = conn.cursor()
