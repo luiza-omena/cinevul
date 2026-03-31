@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Filmes - CineViewExperience</title>
+  <title>Movies - CineViewExperience</title>
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/movies.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -13,14 +13,14 @@
       <img src="assets/icons/Burger.svg" alt="Menu" class="burger-icon">
     </button>
     <div class="dropdown hidden" id="userMenu">
-      <a href="index.html">Início</a>
-      <a href="profile.html">Perfil</a>
-      <button onclick="logout()">Sair</button>
+      <a href="index.html">Home</a>
+      <a href="profile.html">Profile</a>
+      <button onclick="logout()">Log out</button>
     </div>
   </div>  
 
   <div class="container">
-    <h1 id="moviesTitle" class="auth-only">Filmes em Cartaz</h1>
+    <h1 id="moviesTitle" class="auth-only">Now Playing</h1>
     <div id="moviesList" class="auth-only"></div>
   </div>
 
@@ -28,7 +28,7 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
       <div id="ticketContent">
-        <h2>Comprar Ingresso</h2>
+        <h2>Buy Ticket</h2>
         <div class="modal-body">
           <div class="movie-info">
             <img id="modalPoster" src="" alt="Poster" />
@@ -38,32 +38,32 @@
   
           <form id="ticketForm" onsubmit="submitTicket(event)">
             <input type="hidden" id="movieId" />
-            <label for="quantity">Quantidade:</label>
+            <label for="quantity">Quantity:</label>
             <input type="number" id="quantity" min="1" value="1" required />
   
-            <label for="type">Tipo:</label>
+            <label for="type">Type:</label>
             <select id="type" onchange="toggleProofInput()" required>
-              <option value="inteira">Inteira</option>
-              <option value="meia">Meia</option>
+              <option value="full">Full</option>
+              <option value="half">Half</option>
             </select>
   
             <div id="proofContainer" class="hidden">
-              <label for="proof">Comprovante de meia:</label>
-              <input type="text" id="proof" placeholder="Descreva seu comprovante" />
+              <label for="proof">Half-price proof:</label>
+              <input type="text" id="proof" placeholder="Describe your proof" />
             </div>
   
-            <label for="seats">Cadeiras (ex: A1,A2):</label>
-            <input type="text" id="seats" placeholder="Ex: A1,A2" required />
+            <label for="seats">Seats (e.g., A1,A2):</label>
+            <input type="text" id="seats" placeholder="e.g., A1,A2" required />
   
             <p id="pricePreview" style="cursor: default;"></p>
   
-            <button type="submit">Confirmar</button>
+            <button type="submit">Confirm</button>
           </form>
         </div>
       </div>
   
       <div id="confirmationMessage" class="confirmation hidden">
-        <h2>Compra Confirmada!</h2>
+        <h2>Purchase Confirmed!</h2>
         <p id="confirmationText"></p>
       </div>
     </div>

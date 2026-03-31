@@ -2,6 +2,8 @@ let orders = [];
 let currentPage = 1;
 let ordersPerPage = 10;
 let activeFilters = {};
+const normalizeType = (type) => (type === "inteira" ? "full" : type === "meia" ? "half" : type);
+const typeLabel = (type) => (normalizeType(type) === "full" ? "Full" : normalizeType(type) === "half" ? "Half" : type);
 
 (async () => {
   try {
@@ -13,7 +15,7 @@ let activeFilters = {};
         <html>
           <head>
             <meta charset="UTF-8">
-            <title>Acesso Negado</title>
+            <title>Access Denied</title>
             <link rel="stylesheet" href="css/global.css">
             <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
             <style>
@@ -58,9 +60,9 @@ let activeFilters = {};
           </head>
           <body>
             <div class="unauth-container">
-              <h2>Acesso não autorizado</h2>
-              <p>Esta página é restrita a administradores.</p>
-              <a class="login-btn" href="login.html">Fazer login</a>
+              <h2>Unauthorized access</h2>
+              <p>This page is restricted to administrators.</p>
+              <a class="login-btn" href="login.html">Sign in</a>
             </div>
           </body>
         </html>
@@ -73,12 +75,12 @@ let activeFilters = {};
     renderPage();
 
   } catch (err) {
-    console.error("Erro ao carregar pedidos:", err);
+    console.error("Error loading orders:", err);
     document.write(`
       <html>
         <head>
           <meta charset="UTF-8">
-          <title>Erro</title>
+          <title>Error</title>
           <link rel="stylesheet" href="css/global.css">
           <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
           <style>
@@ -110,8 +112,8 @@ let activeFilters = {};
         </head>
         <body>
           <div class="unauth-container">
-            <h2>Erro ao carregar pedidos</h2>
-            <p>Tente novamente mais tarde.</p>
+            <h2>Error loading orders</h2>
+            <p>Please try again later.</p>
           </div>
         </body>
       </html>
@@ -135,47 +137,47 @@ function renderPage() {
       </button>
       <div class="dropdown hidden" id="userMenu">
         <a href="dashboard.html">Dashboard</a>
-        <a href="index.html">Início</a>
-        <a href="profile.html">Perfil</a>
-        <a href="movies.html">Filmes</a>
-        <a href="users.html">Usuários</a>
-        <a href="dashboard-movies.html">Gerenciar Filmes</a>
-        <button onclick="logout()">Sair</button>
+        <a href="index.html">Home</a>
+        <a href="profile.html">Profile</a>
+        <a href="movies.html">Movies</a>
+        <a href="users.html">Users</a>
+        <a href="dashboard-movies.html">Manage Movies</a>
+        <button onclick="logout()">Log out</button>
       </div>
     </div>
 
     <div class="container">
-      <h1 class="auth-only">Pedidos</h1>
+      <h1 class="auth-only">Orders</h1>
 
       <div class="filters auth-only">
         <div class="search-filters">
-          <input type="text" id="searchInput" placeholder="Buscar por filme, tipo, cadeiras ou usuário..." value="${activeFilters.search || ''}">
+          <input type="text" id="searchInput" placeholder="Search by movie, type, seats, or user..." value="${activeFilters.search || ''}">
           <button onclick="applyFilters()" class="filter-btn">➤</button>
         </div>
         <select id="typeFilter" onchange="applyFilters()">
-          <option value="">Todos os tipos</option>
-          <option value="inteira" ${activeFilters.type === 'inteira' ? 'selected' : ''}>Inteira</option>
-          <option value="meia" ${activeFilters.type === 'meia' ? 'selected' : ''}>Meia</option>
+          <option value="">All types</option>
+          <option value="full" ${activeFilters.type === 'full' ? 'selected' : ''}>Full</option>
+          <option value="half" ${activeFilters.type === 'half' ? 'selected' : ''}>Half</option>
         </select>
       </div>
 
       <div id="activeFilters" class="active-filters auth-only">
-        ${activeFilters.search ? `<div class='filter-chip'>Busca: "${activeFilters.search}" <button onclick='removeFilter("search")'>×</button></div>` : ''}
-        ${activeFilters.type ? `<div class='filter-chip'>Tipo: ${activeFilters.type} <button onclick='removeFilter("type")'>×</button></div>` : ''}
+        ${activeFilters.search ? `<div class='filter-chip'>Search: "${activeFilters.search}" <button onclick='removeFilter("search")'>×</button></div>` : ''}
+        ${activeFilters.type ? `<div class='filter-chip'>Type: ${typeLabel(activeFilters.type)} <button onclick='removeFilter("type")'>×</button></div>` : ''}
       </div>
   `;
 
   pageOrders.forEach(o => {
     html += `
       <div class="order-card">
-        <h3>Pedido #${o.id}</h3>
-        <p><strong>Filme:</strong> ${o.movie_title}</p>
-        <p><strong>Usuário:</strong> ${o.username}</p>
-        <p><strong>Quantidade:</strong> ${o.quantity}</p>
-        <p><strong>Tipo:</strong> ${o.type}</p>
-        <p><strong>Cadeiras:</strong> ${o.seats}</p>
+        <h3>Order #${o.id}</h3>
+        <p><strong>Movie:</strong> ${o.movie_title}</p>
+        <p><strong>User:</strong> ${o.username}</p>
+        <p><strong>Quantity:</strong> ${o.quantity}</p>
+        <p><strong>Type:</strong> ${typeLabel(o.type)}</p>
+        <p><strong>Seats:</strong> ${o.seats}</p>
         <p><strong>Total:</strong> R$ ${parseFloat(o.total_price).toFixed(2)}</p>
-        ${o.proof ? `<p><strong>Comprovante:</strong> ${o.proof}</p>` : ''}
+        ${o.proof ? `<p><strong>Proof:</strong> ${o.proof}</p>` : ''}
       </div>
     `;
   });
@@ -190,10 +192,10 @@ function renderPage() {
 
   html += `
       <select onchange="changePerPage(this.value)" class="per-page-select">
-        <option value="5" ${ordersPerPage === 5 ? 'selected' : ''}>5 por página</option>
-        <option value="10" ${ordersPerPage === 10 ? 'selected' : ''}>10 por página</option>
-        <option value="20" ${ordersPerPage === 20 ? 'selected' : ''}>20 por página</option>
-        <option value="50" ${ordersPerPage === 50 ? 'selected' : ''}>50 por página</option>
+        <option value="5" ${ordersPerPage === 5 ? 'selected' : ''}>5 per page</option>
+        <option value="10" ${ordersPerPage === 10 ? 'selected' : ''}>10 per page</option>
+        <option value="20" ${ordersPerPage === 20 ? 'selected' : ''}>20 per page</option>
+        <option value="50" ${ordersPerPage === 50 ? 'selected' : ''}>50 per page</option>
       </select>
     </div>
   </div>`;
@@ -203,7 +205,7 @@ function renderPage() {
     <html>
       <head>
         <meta charset="UTF-8">
-        <title>Pedidos</title>
+        <title>Orders</title>
         <link rel="stylesheet" href="css/global.css">
         <link rel="stylesheet" href="css/orders.css">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -256,7 +258,7 @@ function renderPage() {
               );
             }
             if (activeFilters.type) {
-              filtered = filtered.filter(o => o.type === activeFilters.type);
+              filtered = filtered.filter(o => normalizeType(o.type) === activeFilters.type);
             }
             return filtered;
           }
@@ -287,7 +289,7 @@ function getFilteredOrders() {
     );
   }
   if (activeFilters.type) {
-    filtered = filtered.filter(o => o.type === activeFilters.type);
+    filtered = filtered.filter(o => normalizeType(o.type) === activeFilters.type);
   }
   return filtered;
 }

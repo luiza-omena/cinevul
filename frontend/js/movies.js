@@ -20,8 +20,8 @@ async function loadMovies() {
     container.classList.add("center-message");
     container.innerHTML = `
       <div class="unauth-container">
-        <h2>Você não está logado</h2>
-        <p>Para ver os filmes disponíveis e comprar ingressos, faça login na plataforma.</p>
+        <h2>You are not logged in</h2>
+        <p>To view available movies and buy tickets, please log in to the platform.</p>
         <a class="login-btn" href="login.html">Login</a>
       </div>
     `;
@@ -37,7 +37,7 @@ async function loadMovies() {
       <div class="info">
         <h3>${movie.title}</h3>
         <p style="margin-top: -0.2rem;">${movie.release_year}</p>
-        <button onclick="event.stopPropagation(); orderTicket(${movie.id}, ${movie.price}, '${movie.title}', '${movie.description}', '${movie.image_url}')">Comprar Ingresso</button>
+        <button onclick="event.stopPropagation(); orderTicket(${movie.id}, ${movie.price}, '${movie.title}', '${movie.description}', '${movie.image_url}')">Buy Ticket</button>
       </div>
     </div>
   `).join("");
@@ -65,7 +65,7 @@ function closeModal() {
 
 function resetForm() {
   document.getElementById("ticketForm").reset();
-  document.getElementById("type").value = "inteira";
+  document.getElementById("type").value = "full";
   document.getElementById("proofContainer").classList.add("hidden");
   document.getElementById("pricePreview").textContent = "";
   document.getElementById("confirmationMessage").classList.add("hidden");
@@ -75,12 +75,12 @@ function resetForm() {
 function toggleProofInput() {
   const type = document.getElementById("type").value;
   const proof = document.getElementById("proofContainer");
-  proof.classList.toggle("hidden", type !== "meia");
+  proof.classList.toggle("hidden", type !== "half");
 }
 
 function calculatePrice(type, qty) {
   const basePrice = parseFloat(document.getElementById("modal").dataset.price);
-  const ticketPrice = type === "meia" ? basePrice / 2 : basePrice;
+  const ticketPrice = type === "half" ? basePrice / 2 : basePrice;
   return ticketPrice * qty;
 }
 
@@ -121,9 +121,9 @@ async function submitTicket(e) {
   if (res.ok) {
     document.getElementById("ticketContent").classList.add("hidden");
     const msg = document.getElementById("confirmationMessage");
-    document.getElementById("confirmationText").textContent = `Você garantiu ingresso(s) para "${movieTitle}"!`;
+    document.getElementById("confirmationText").textContent = `You booked ticket(s) for "${movieTitle}"!`;
     msg.classList.remove("hidden");
   } else {
-    alert("Erro ao realizar a compra.");
+    alert("Error completing purchase.");
   }
 }

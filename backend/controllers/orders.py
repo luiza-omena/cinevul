@@ -1,6 +1,14 @@
 from database import get_connection
 
+def normalize_ticket_type(ticket_type):
+    if ticket_type == "inteira":
+        return "full"
+    if ticket_type == "meia":
+        return "half"
+    return ticket_type
+
 def create_order(data, user_id):
+    normalized_type = normalize_ticket_type(data.get("type"))
     conn = get_connection()
     cur = conn.cursor()
 
@@ -14,7 +22,7 @@ def create_order(data, user_id):
             user_id,
             data["movie_id"],
             data["quantity"],
-            data["type"],
+            normalized_type,
             data.get("proof"),
             data["total_price"],
             data.get("seats")
@@ -37,7 +45,7 @@ def get_all_orders_with_movies(user_id):
     if not result or not result[0]:
         cur.close()
         conn.close()
-        return {"error": "Acesso não autorizado"}
+        return {"error": "Unauthorized access"}
 
     cur.execute("""
         SELECT o.id, o.quantity, o.type, o.proof, o.total_price, o.seats, m.title, u.username
@@ -54,7 +62,7 @@ def get_all_orders_with_movies(user_id):
         {
             "id": row[0],
             "quantity": row[1],
-            "type": row[2],
+            "type": normalize_ticket_type(row[2]),
             "proof": row[3],
             "total_price": float(row[4]),
             "seats": row[5],
