@@ -5,8 +5,8 @@ services:
     image: postgres:16-alpine
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: senha123
-      POSTGRES_DB: cinema
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: cineviewexperience
     ports:
       - "5432:5432"
     volumes:
@@ -15,16 +15,16 @@ services:
       - ./scripts/init_admin.sql:/docker-entrypoint-initdb.d/init_admin.sql
       - ./scripts/init_users.sql:/docker-entrypoint-initdb.d/init_users.sql
       - ./scripts/init_orders.sql:/docker-entrypoint-initdb.d/init_orders.sql
-      
+
 
   backend:
     build: .
     ports:
       - "8000:8000"
     environment:
-      DB_NAME: cinema
+      DB_NAME: cineviewexperience
       DB_USER: postgres
-      DB_PASSWORD: senha123
+      DB_PASSWORD: password123
       DB_HOST: db
     depends_on:
       - db
