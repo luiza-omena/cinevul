@@ -32,11 +32,11 @@ recoverForm.addEventListener("submit", async (e) => {
     msg.textContent = "";
   } else {
     if (result.error === "user_not_found") {
-      msg.textContent = "Usuário não encontrado.";
+      msg.textContent = "User not found.";
     } else if (result.error === "invalid_answers") {
-      msg.textContent = "Informações incorretas!";
+      msg.textContent = "Incorrect information!";
     } else {
-      msg.textContent = "Erro desconhecido.";
+      msg.textContent = "Unknown error.";
     }
     msg.className = "error-msg";
   }  
@@ -52,7 +52,7 @@ newPasswordForm.addEventListener("submit", async (e) => {
   const forbidden = /(123|111|222|333|444|555|666|777|888|999)/.test(password);
 
   if (!hasUpper || !hasSpecial || !isLong || forbidden) {
-    msg.textContent = "Senha fraca. Use ao menos 8 caracteres, 1 maiúscula e 1 símbolo. Evite sequências.";
+    msg.textContent = "Weak password. Use at least 8 characters, 1 uppercase letter, and 1 symbol. Avoid sequences.";
     msg.className = "error-msg";
     return;
   }
@@ -74,7 +74,7 @@ newPasswordForm.addEventListener("submit", async (e) => {
     confirmation.classList.remove("hidden");
     setTimeout(() => window.location.href = "login.html", 300);
   } else {
-    msg.textContent = "Erro ao redefinir a senha.";
+    msg.textContent = "Error resetting password.";
     msg.className = "error-msg";
   }
 });

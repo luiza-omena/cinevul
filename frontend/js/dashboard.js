@@ -14,9 +14,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       errorDiv.innerHTML = `
         <div class="center-message">
           <div class="unauth-container">
-            <h2>Acesso não autorizado</h2>
-            <p>Esta página é restrita a administradores.</p>
-            <a class="login-btn" href="login.html">Fazer login</a>
+            <h2>Unauthorized access</h2>
+            <p>This page is restricted to administrators.</p>
+            <a class="login-btn" href="login.html">Sign in</a>
           </div>
         </div>
       `;
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
   } catch (err) {
-    console.error("Erro no dashboard:", err);
+    console.error("Dashboard error:", err);
     const menuWrapper = document.querySelector(".menu-wrapper");
     const container = document.querySelector(".container");
 
@@ -46,8 +46,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     errorDiv.innerHTML = `
       <div class="center-message">
         <div class="unauth-container">
-          <h2>Erro ao carregar dados</h2>
-          <p>Tente novamente mais tarde.</p>
+          <h2>Error loading data</h2>
+          <p>Please try again later.</p>
         </div>
       </div>
     `;
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       data: {
         labels: monthlyRevenue.map(item => item.month),
         datasets: [{
-          label: "Faturamento (R$)",
+          label: "Revenue (R$)",
           data: monthlyRevenue.map(item => item.total),
           borderColor: "#e50914",
           backgroundColor: "rgba(229,9,20,0.2)",
@@ -84,9 +84,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["Usuários", "Pedidos", "Faturamento Total (R$)"],
+        labels: ["Users", "Orders", "Total Revenue (R$)"],
         datasets: [{
-          label: "Totais",
+          label: "Totals",
           data: [totals.users, totals.orders, totals.revenue],
           backgroundColor: ["#e50914", "#bf0810", "#8c0606"]
         }]
@@ -108,12 +108,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (chartsContainer) {
       chartsContainer.innerHTML = `
         <div class="chart-wrapper">
-          <h2>Faturamento Mensal</h2>
-          <div class="chart-error">Gráfico não disponível (Chart.js não carregado) - tente outro navegador</div>
+          <h2>Monthly Revenue</h2>
+          <div class="chart-error">Chart unavailable (Chart.js not loaded) - try another browser</div>
         </div>
         <div class="chart-wrapper">
-          <h2>Estatísticas</h2>
-          <div class="chart-error">Gráfico não disponível (Chart.js não carregado) - tente outro navegador</div>
+          <h2>Statistics</h2>
+          <div class="chart-error">Chart unavailable (Chart.js not loaded) - try another browser</div>
         </div>
       `;
     }

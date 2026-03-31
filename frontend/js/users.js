@@ -66,9 +66,9 @@ async function loadAdminUsers() {
       errorDiv.innerHTML = `
         <div class="center-message">
           <div class="unauth-container">
-            <h2>Acesso não autorizado</h2>
-            <p>Esta página é restrita a administradores.</p>
-            <a class="login-btn" href="login.html">Fazer login</a>
+            <h2>Unauthorized access</h2>
+            <p>This page is restricted to administrators.</p>
+            <a class="login-btn" href="login.html">Sign in</a>
           </div>
         </div>
       `;
@@ -80,7 +80,7 @@ async function loadAdminUsers() {
     users = data;
     renderUsers();
   } catch (err) {
-    console.error("Erro ao carregar usuários:", err);
+    console.error("Error loading users:", err);
     const container = document.querySelector(".container");
     container.classList.add("hidden");
     const menuWrapper = document.querySelector(".menu-wrapper");
@@ -90,8 +90,8 @@ async function loadAdminUsers() {
     errorDiv.innerHTML = `
       <div class="center-message">
         <div class="unauth-container">
-          <h2>Erro ao carregar usuários</h2>
-          <p>Tente novamente mais tarde.</p>
+          <h2>Error loading users</h2>
+          <p>Please try again later.</p>
         </div>
       </div>
     `;
@@ -102,7 +102,7 @@ async function loadAdminUsers() {
 function renderActiveFilters() {
   const container = document.getElementById("activeFilters");
   container.innerHTML = Object.entries(activeFilters).map(([key, value]) => {
-    let label = key === "search" ? `Busca: "${value}"` : `Tipo: ${value === "admin" ? "Admin" : "Não Admin"}`;
+    let label = key === "search" ? `Search: "${value}"` : `Type: ${value === "admin" ? "Admin" : "Non-admin"}`;
     return `
       <div class="filter-chip">
         ${label}
@@ -160,10 +160,10 @@ function renderUsers() {
         <div class="user-info">
           <p><strong>${u.full_name}</strong> (${u.username})</p>
           <p>Email: ${u.email}</p>
-          <p>Celular: ${phoneDisplay}</p>
+          <p>Phone: ${phoneDisplay}</p>
         </div>
         <button class="delete-btn" onclick="deleteUser(${u.id})">
-          <img src="assets/icons/Trash.svg" alt="Excluir">
+          <img src="assets/icons/Trash.svg" alt="Delete">
         </button>
       </div>
     `;
@@ -245,11 +245,11 @@ document.getElementById("confirmDelete").addEventListener("click", async () => {
       closeDeleteModal();
       location.reload();
     } else {
-      alert("Erro ao excluir usuário.");
+      alert("Error deleting user.");
       closeDeleteModal();
     }
   } catch (err) {
-    alert("Erro ao excluir usuário.");
+    alert("Error deleting user.");
     closeDeleteModal();
   }
 });

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Dashboard - CineViewExperience</title>
@@ -13,13 +13,13 @@
       <img src="assets/icons/Burger.svg" alt="Menu" class="burger-icon">
     </button>
     <div class="dropdown hidden" id="userMenu">
-      <a href="index.html">Início</a>
-      <a href="profile.html">Perfil</a>
-      <a href="movies.html">Filmes</a>
-      <a href="users.html">Usuários</a>
-      <a href="orders.html">Pedidos</a>
-      <a href="dashboard-movies.html">Gerenciar Filmes</a>
-      <button onclick="logout()">Sair</button>
+      <a href="index.html">Home</a>
+      <a href="profile.html">Profile</a>
+      <a href="movies.html">Movies</a>
+      <a href="users.html">Users</a>
+      <a href="orders.html">Orders</a>
+      <a href="dashboard-movies.html">Manage Movies</a>
+      <button onclick="logout()">Log out</button>
     </div>
   </div>
 
@@ -27,18 +27,18 @@
     <h1>Dashboard</h1>
 
     <div class="dashboard-links">
-      <a href="users.html" class="dashboard-btn">Gerenciar Usuários</a>
-      <a href="dashboard-movies.html" class="dashboard-btn">Gerenciar Filmes</a>
-      <a href="orders.html" class="dashboard-btn">Ver Pedidos</a>
+      <a href="users.html" class="dashboard-btn">Manage Users</a>
+      <a href="dashboard-movies.html" class="dashboard-btn">Manage Movies</a>
+      <a href="orders.html" class="dashboard-btn">View Orders</a>
     </div>
 
     <div class="charts-container">
       <div class="chart-wrapper">
-        <h2>Faturamento Mensal</h2>
+        <h2>Monthly Revenue</h2>
         <canvas id="revenueChart"></canvas>
       </div>
       <div class="chart-wrapper">
-        <h2>Estatísticas</h2>
+        <h2>Statistics</h2>
         <canvas id="statsChart"></canvas>
       </div>
     </div>

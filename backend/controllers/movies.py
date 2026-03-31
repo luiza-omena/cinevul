@@ -66,7 +66,7 @@ def update_movie(data):
         ))
         conn.commit()
         if cur.rowcount == 0:
-            return {"success": False, "error": "Filme não encontrado"}
+            return {"success": False, "error": "Movie not found"}
         return {"success": True}
     except Exception as e:
         return {"success": False, "error": str(e)}
@@ -81,7 +81,7 @@ def delete_movie(movie_id):
         cur.execute("DELETE FROM movies WHERE id = %s", (movie_id,))
         conn.commit()
         if cur.rowcount == 0:
-            return {"success": False, "error": "Filme não encontrado"}
+            return {"success": False, "error": "Movie not found"}
         return {"success": True}
     except Exception as e:
         return {"success": False, "error": str(e)}
